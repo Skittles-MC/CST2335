@@ -1,6 +1,14 @@
 <resources>
-    <string name="app_name">Android Labs</string>
-    <string name="hello_message">Hello World!</string>
-    <string name="ButtonText">I\’m a button</string>
+    <string name="app_name">Android Lab 2</string>
+
+    parameter android:textSize="30dp"
+
+    <string name="Title">Look at my GUI</string>
+    <string name="Checkbox">Check this out!</string>
+    <string name="Button">CLICK HERE</string>
+    <string name="Switch">Switch on / off</string>
+    <string name="EditText">Type here</string>
+
+
 </resources>
 

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Android Lab 2</string>
+    <string name="Title">私のGUIを見て</string>
+    <string name="Checkbox">これをチェックしてください!</string>
+    <string name="Button">ここをクリック！</string>
+    <string name="Switch">スイッチ on / off</string>
+    <string name="EditText">ここに入力</string>
+</resources>
