@@ -1,18 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
-
+    android:orientation="vertical"
+    >
     <TextView
-        android:layout_width="wrap_content"
+        android:id="@+id/enterEmail"
+        android:gravity="fill"
+        android:textSize="30dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="40dp"
+        android:text="@string/TitleEmail" />
+    <EditText
+        android:id="@+id/email"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/enterEmail"
+        android:textSize="20dp"
+        android:hint="@string/InputEmail"
+        android:inputType="textEmailAddress"
+        />
+    <TextView
+        android:id="@+id/enterPassword"
+        android:gravity="fill"
+        android:textSize="20dp"
+        android:layout_below="@id/email"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:hint="@string/TitlePassword" />
+    <EditText
+        android:id="@+id/password"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/enterPassword"
+        android:inputType="textPassword"
+        android:hint=" "/>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <Button
+        android:id="@+id/log_in_butt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/password"
+        android:gravity="fill"
+        android:textSize="30dp"
+        android:textAlignment="center"
+        android:layout_marginBottom="-50dp"
+        android:hint="@string/Button1" />
+</RelativeLayout>

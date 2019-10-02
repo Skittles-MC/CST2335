@@ -1,9 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Android Lab 2</string>
-    <string name="Title">私のGUIを見て</string>
-    <string name="Checkbox">これをチェックしてください!</string>
-    <string name="Button">ここをクリック！</string>
-    <string name="Switch">スイッチ on / off</string>
-    <string name="EditText">ここに入力</string>
+    <string name="app_name">Android Lab 3</string>
+
+    parameter android:textSize="28dp"
+
+    <string name="ProfileTile">あなたのプロフィール</string>
+    <string name="NameTitle">あなたの名前：</string>
+    <string name="NameInput">あなたの名前を入力してください</string>
+    <string name="EmailTitle">あなたのメールアドレス：</string>
+    <string name="EmailInput">メールアドレスを入力</string>
+    <string name="PictureTitle">あなたの画像：</string>
+    <string name="PictureInstructions">上のボタンをクリックして写真を撮ります</string>
+
+    <string name="TitleEmail">メールアドレスを入力してください：</string>
+    <string name="InputEmail">ここにメールを入力してください</string>
+    <string name="TitlePassword">パスワードを入力してください：</string>
+    <string name="Button1">ログインする</string>
+
+
+
 </resources>

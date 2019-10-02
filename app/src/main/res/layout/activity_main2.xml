@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <EditText
+        android:id="@+id/Name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/NameInput"
+        android:inputType="textPersonName"
+        android:layout_marginTop="100dp"
+        android:layout_marginBottom="25dp"/>
+    <TextView
+        android:id="@+id/yourProfile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="100dp"
+        android:textSize="25dp"
+        android:text="@string/ProfileTile" />
+
+    <TextView
+        android:id="@+id/YourName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/yourProfile"
+        android:layout_marginBottom="-60dp"
+        android:textSize="25dp"
+        android:text="@string/NameTitle"/>
+
+    <TextView
+        android:id="@+id/yourEmail"
+        android:layout_width="wrap_content"
+        android:layout_below="@id/Name"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:textSize="25dp"
+        android:hint="@string/EmailTitle" />
+
+
+    <TextView
+        android:id="@+id/userEmail"
+        android:layout_width="match_parent"
+        android:gravity="fill"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/yourEmail"
+        android:layout_marginBottom="20dp"
+        android:textSize="20dp"
+        android:textAlignment="center"
+        android:hint=" " />
+    <TextView
+        android:id="@+id/yourPic"
+        android:layout_width="wrap_content"
+        android:layout_below="@id/userEmail"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:textSize="25dp"
+        android:hint="@string/PictureTitle" />
+
+    <ImageButton
+        android:id="@+id/imageButton"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginTop="40dp"
+        android:layout_below="@id/userEmail"
+        android:src="@android:drawable/picture_frame"/>
+
+    <TextView
+        android:id="@+id/lastText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_below="@+id/imageButton"
+        android:text="@string/PictureInstructions"
+        android:textSize="12sp" />
+
+</RelativeLayout>

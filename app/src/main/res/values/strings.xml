@@ -1,13 +1,22 @@
 <resources>
-    <string name="app_name">Android Lab 2</string>
+    <string name="app_name">Android Lab 3</string>
 
     parameter android:textSize="30dp"
 
-    <string name="Title">Look at my GUI</string>
-    <string name="Checkbox">Check this out!</string>
-    <string name="Button">CLICK HERE</string>
-    <string name="Switch">Switch on / off</string>
-    <string name="EditText">Type here</string>
+    <string name="ProfileTile">Your profile</string>
+    <string name="NameTitle">Your name:</string>
+    <string name="NameInput">Enter your name</string>
+    <string name="EmailTitle">Your email:</string>
+    <string name="EmailInput">Enter your email</string>
+    <string name="PictureTitle">Your picture:</string>
+    <string name="PictureInstructions">Click the button above to take a picture</string>
+
+
+    <string name="TitleEmail">Enter your email address:</string>
+    <string name="InputEmail">Type email here</string>
+    <string name="TitlePassword">Type your password:</string>
+    <string name="Button1">LOGIN</string>
+
 
 
 </resources>
