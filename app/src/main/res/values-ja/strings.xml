@@ -18,5 +18,11 @@
     <string name="Button1">ログインする</string>
 
 
+    <string name="send">送信</string>
+    <string name="type_here">ここに入力</string>
+    <string name="ChatButton">チャットに行く</string>
+    <string name="recieve">受信する</string>
+
+
 
 </resources>

@@ -13,12 +13,14 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 public class ProfileActivity extends AppCompatActivity {
     private ImageView imageButton;
+    private Button chatRoomButton;
 
     static final int REQUEST_IMAGE_CAPTURE = 1;
     private TextView userEmail;
@@ -53,6 +55,7 @@ public class ProfileActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main2);
 
         imageButton = findViewById(R.id.imageButton);
+        chatRoomButton = findViewById(R.id.goToChat);
         userEmail = findViewById(R.id.userEmail);
 
         Intent intent = getIntent();
@@ -63,6 +66,14 @@ public class ProfileActivity extends AppCompatActivity {
             @Override
             public void onClick(View v ){
                 dispatchTakePictureIntent();
+            }
+        });
+
+        chatRoomButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent goToChatPage = new Intent(ProfileActivity.this, ChatRoomActivity.class);
+                startActivity(goToChatPage);
             }
         });
         Log.e(ACTIVITY_NAME, "In function : onCreate ");

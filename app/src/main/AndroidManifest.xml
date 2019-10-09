@@ -26,6 +26,13 @@
             </intent-filter>
         </activity>
 
+        <activity
+            android:name=".ChatRoomActivity">
+            <intent-filter>
+                <category android:name="android.intent.categor  y.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
     </application>
 
 </manifest>

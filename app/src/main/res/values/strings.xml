@@ -17,6 +17,13 @@
     <string name="TitlePassword">Type your password:</string>
     <string name="Button1">LOGIN</string>
 
+    <string name="send">SEND</string>
+    <string name="type_here">Type here</string>
+    <string name="ChatButton">Go to chat</string>
+
+    <string name="recieve">RECEIVE</string>
+
+
 
 
 </resources>

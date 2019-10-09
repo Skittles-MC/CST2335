@@ -1,5 +1,4 @@
 package com.example.androidlabs;
-
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.content.Context;
@@ -9,9 +8,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-// setContentView(R.layout.activity_main);
-
-
 
 public class MainActivity extends AppCompatActivity {
     private Button button;
