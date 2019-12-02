@@ -16,6 +16,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <!--        PLACEHOLDER TEXT-->
+        <activity android:name=".FoodRecipePage" />
+        <activity android:name=".NewsArticlePage" />
+        <activity android:name=".CurrencyExchangePage" />
+        <activity android:name=".CarChargerFinderPage" />
     </application>
 
 </manifest>
+
