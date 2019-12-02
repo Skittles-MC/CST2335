@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.androidlabs">
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -21,7 +22,12 @@
         <activity android:name=".FoodRecipePage" />
         <activity android:name=".NewsArticlePage" />
         <activity android:name=".CurrencyExchangePage" />
-        <activity android:name=".CarChargerFinderPage" />
+
+        <activity android:name=".ECSActivity" />
+        <activity android:name=".ECSfavorite"/>
+        <activity android:name=".ECStations" />
+        <activity android:name="ECSdetail"
+            android:windowSoftInputMode="stateHidden"/>
     </application>
 
 </manifest>

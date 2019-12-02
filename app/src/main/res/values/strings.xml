@@ -2,5 +2,13 @@
     <string name="app_name">Android Labs</string>
     <string name="hello_message">Hello World!</string>
     <string name="ButtonText">I\’m a button</string>
+    <string name="ecs_Long">Longitude</string>
+    <string name="ecs_Lat">Latitude </string>
+    <string name="ecs_search">Search</string>
+    <string name="ecs_favorites">Favorites</string>
+    <string name="ecs_back">Go Back</string>
+    <string name="ecs_Deleted"> Delete Successful </string>
+    <string name="ecs_station_added">Station successfully added!</string>
+    <string name="ecs_delete">Delete</string>
 </resources>
 

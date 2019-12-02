@@ -3,6 +3,7 @@ package com.example.androidlabs;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
@@ -16,17 +17,13 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        ImageButton electricCarChargerAPI = findViewById(R.id.charger);
+        ImageButton cars = findViewById(R.id.charger);
         ImageButton newsArticleAPI = findViewById(R.id.news);
         ImageButton foodRecipeAPI = findViewById(R.id.recipe);
         ImageButton conversionAPI = findViewById(R.id.conversionAPI);
 
-        electricCarChargerAPI.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //    Intent goToCarPage = new Intent(MainActivity.this, ChatRoomActivity.class);
-                //    startActivity(goToCarPage);
-            }
+        cars.setOnClickListener(v -> {
+            startActivity(new Intent(MainActivity.this, ECSActivity.class));
         });
 
 
