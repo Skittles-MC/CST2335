@@ -1,175 +1,95 @@
 package com.example.androidlabs;
 
-import androidx.annotation.Nullable;
+
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Intent;
+
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
-import android.util.Log;
+
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.Button;
-import android.widget.ImageView;
+
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
+
 
 import java.util.ArrayList;
 
 
 public class ECSfavorite  extends AppCompatActivity {
     private ArrayList<ECStations> favStations = new ArrayList<>();
-    private static DatabaseHelper dbOpener;
-    private static SQLiteDatabase db;
-    private static BaseAdapter myAdapter;
-    private Intent delData= new Intent();
-    private int numOfDeleted;
+
+     private static SQLiteDatabase db;
+        private static BaseAdapter myAdapter;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_ecs_favorite);
 
-        Button back = findViewById(R.id.back_button);
-        TextView emptyView = findViewById(R.id.favorite_list);
-        emptyView.setVisibility(View.GONE);
-        dbOpener = new DatabaseHelper(this);
 
+        ListView favList = findViewById(R.id.favlist);
+        favList.setAdapter(myAdapter = new MyListAdapter());
+
+
+        DatabaseHelper dbOpener = new DatabaseHelper(this);
+//check this after
         db = dbOpener.getWritableDatabase();
 
+        String[] columns = {DatabaseHelper.COL_ID, DatabaseHelper.COL_TITLE, DatabaseHelper.COL_LATITUDE, DatabaseHelper.COL_LONGITUDE, DatabaseHelper.COL_PHONENO};
+        Cursor results = db.query(false, DatabaseHelper.TABLE_NAME, columns, null, null, null, null, null, null);
+
+        // Find the column indices
+        int idColIndex = results.getColumnIndex(DatabaseHelper.COL_ID);
+        int titleColIndex = results.getColumnIndex(DatabaseHelper.COL_TITLE);
+        int latitudeColIndex = results.getColumnIndex(DatabaseHelper.COL_LATITUDE);
+        int longitudeColIndex = results.getColumnIndex(DatabaseHelper.COL_LONGITUDE);
+        int phoneColIndex = results.getColumnIndex(DatabaseHelper.COL_PHONENO);
+
+        // Iterate over the results, return true if there is a next item
+        while (results.moveToNext()) {
+            long id = results.getLong(idColIndex);
+            String title = results.getString(titleColIndex);
+            String lat = results.getString(latitudeColIndex);
+            String lon = results.getString(longitudeColIndex);
+            String phone = results.getString(phoneColIndex);
 
 
 
-        //set click listener for back to main button
-        back.setOnClickListener(view->{
-            setResult(6,delData);
-            finish();
-        });
 
 
-        //get data from db to be saved locally
-        Cursor cursor= db.query(false,DatabaseHelper.TABLE_NAME,
-                new String[]{
-                        DatabaseHelper.COL_TITLE,
-                        DatabaseHelper.COL_LATITUDE,
-                        DatabaseHelper.COL_LONGITUDE,
-                        DatabaseHelper.COL_PHONENO,
-                        DatabaseHelper.COL_ADDRESS},
-                null, null, null, null, null, null);
 
-        //save data from db to local variable
-        cursor.moveToFirst();
-        while(!cursor.isAfterLast()){
-            String title = cursor.getString(cursor.getColumnIndex(DatabaseHelper.COL_TITLE));
-            String latitude = cursor.getString(cursor.getColumnIndex(DatabaseHelper.COL_LATITUDE));
-            String longitude = cursor.getString(cursor.getColumnIndex(DatabaseHelper.COL_LONGITUDE));
-            String phoneNo = cursor.getString(cursor.getColumnIndex(DatabaseHelper.COL_PHONENO));
-            String address = cursor.getString(cursor.getColumnIndex(DatabaseHelper.COL_ADDRESS));
-            ECStations stations = new ECStations(title, latitude, longitude, phoneNo, address);
-            stations.setFav(true);
-            cursor.moveToNext();
-            favStations.add(stations);
-        }
-        cursor.close();
 
-        // set up list view
-        ListView favList = findViewById(R.id.listView_favorite);
 
-        myAdapter = new MyListAdapter();
-        favList.setAdapter(myAdapter);
 
-        if(myAdapter.getCount() == 0){
-            emptyView.setVisibility(View.VISIBLE);
+            favStations.add(new ECStations(id, title, lat, lon, phone));
         }
 
 
-        favList.setOnItemClickListener((parent, view, position, id) -> {
-            Intent detail = new Intent(ECSfavorite.this,ECSdetail.class);
-            detail.putExtra("title", favStations.get(position).getTitle());
-            detail.putExtra("latitude", favStations.get(position).getLatitude());
-            detail.putExtra("longitude", favStations.get(position).getLongitude());
-            detail.putExtra("phoneNo", favStations.get(position).getPhoneNo());
-            detail.putExtra("address", favStations.get(position).getAddress());
-            detail.putExtra("fav", favStations.get(position).isFav());
-            startActivityForResult(detail, 5);
-        });
+
+
+
+
+
+
 
     }
 
-    /**
-     * if an list item is deleted, do the following statements
-     * @param requestCode - from this page
-     * @param resultCode - from previous page
-     * @param data - data need processing
-     */
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if(data!=null){
-            // from detail page, to delete one station from fav
-            if (requestCode == 5 && resultCode == 3) {
-                // if the data is needed to be deleted from favorite stations
-                if (data.getBooleanExtra("deleteFromFav", false)) {
-                    String latitude = data.getStringExtra("latitude");
-                    String longitude = data.getStringExtra("longitude");
-
-                    Cursor cursor = db.query(true, DatabaseHelper.TABLE_NAME,
-                            new String[]{DatabaseHelper.COL_ID},
-                            DatabaseHelper.COL_LATITUDE + " = ? AND " +
-                                    DatabaseHelper.COL_LONGITUDE + " = ? "
-                            , new String[]{latitude, longitude}, null, null, null, null);
-                    cursor.moveToFirst();
-                    if (cursor.getCount() > 0) {
-                        int id = cursor.getInt(cursor.getColumnIndex(DatabaseHelper.COL_ID));
-                        Log.i("id to be deleted is" + id, "eccsfmain");
-                        db.delete(DatabaseHelper.TABLE_NAME, DatabaseHelper.COL_ID + "=?",
-                                new String[]{Long.toString(id)});
-                    }
-                    cursor.close();
-
-                    for(ECStations station: favStations){
-                        if(station.getLongitude().equals(longitude)){
-                            favStations.remove(station);
-                            Toast.makeText(this, R.string.ecs_Deleted,
-                                    Toast.LENGTH_SHORT).show();
-                            myAdapter.notifyDataSetChanged();
-
-                            delData.putExtra("numOfDel", numOfDeleted);
-                            delData.putExtra(numOfDeleted+"", latitude);
-                            numOfDeleted++;
-                            break;
-                        }
-                    }
 
 
-                    View emptyView = findViewById(R.id.favorite_list);
-                    if(myAdapter.getCount() == 0){
-
-                        emptyView.setVisibility(View.VISIBLE);
-                    }else{
-                        emptyView.setVisibility(View.GONE);
-                    }
-                }
-            }
-
-
-        }
-    }
-
-    /**
-     * Defines the list adapter for the stations list
-     */
-    class MyListAdapter extends BaseAdapter {
+    private class MyListAdapter extends BaseAdapter {
         @Override
         public int getCount() {
             return favStations.size();
         }
 
         @Override
-        public Object getItem(int i) {
+        public ECStations getItem(int i) {
             return favStations.get(i);
         }
 
@@ -181,16 +101,31 @@ public class ECSfavorite  extends AppCompatActivity {
         @Override
         public View getView(int position, View oldView, ViewGroup parent) {
 
-            oldView = getLayoutInflater().inflate(R.layout.list_view_ecs, parent, false);
+            View thisRow = oldView;
 
-            TextView title = oldView.findViewById(R.id.row_title);
-            TextView address = oldView.findViewById(R.id.row_address);
-            ImageView saved = oldView.findViewById(R.id.row_saved);
-//            saved.setVisibility(View.GONE);
+            if(thisRow== null)
+
+            thisRow = getLayoutInflater().inflate(R.layout.list_view_fav ,null);
+
+            TextView title = thisRow.findViewById(R.id.row_title_fav);
+            TextView latitude =thisRow.findViewById(R.id.row_lat_fav);
+            TextView longitude =thisRow.findViewById(R.id.row_long_fav);
+            TextView phoneNo = thisRow.findViewById(R.id.row_phone_fav);
+
+
 
             title.setText(favStations.get(position).getTitle());
-            address.setText(favStations.get(position).getAddress());
-            return oldView;
+            latitude.setText(favStations.get(position).getLatitude());
+            longitude.setText(favStations.get(position).getLongitude());
+            phoneNo.setText(favStations.get(position).getPhoneNo());
+
+            ECStations stations = new ECStations();
+
+            title.setText(stations.getTitle1());
+            latitude.setText("Latitude " + stations.getLatitude());
+            longitude.setText("Longitude " + stations.getLongitude());
+            phoneNo.setText("Phone # " + stations.getPhoneNo());
+            return thisRow;
         }
     }
 }

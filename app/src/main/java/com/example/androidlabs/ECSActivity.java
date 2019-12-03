@@ -4,12 +4,12 @@ package com.example.androidlabs;
 
 
 
-import androidx.annotation.Nullable;
+
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-import android.content.ContentValues;
+
 import android.content.Intent;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -17,18 +17,19 @@ import org.json.JSONObject;
 
 import java.io.BufferedReader;
 
-import android.database.Cursor;
+
 import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
+
+import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
+
 import android.os.Bundle;
-import android.util.Log;
+
 
 import android.view.View;
 import android.view.ViewGroup;
@@ -38,6 +39,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
+
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -52,13 +54,19 @@ public class ECSActivity extends AppCompatActivity {
 
     private static ArrayList<ECStations> searchedStations = new ArrayList<>();
 
-    private static SQLiteDatabase db;
+
 
     private static BaseAdapter myAdapter;
 
     private static ProgressBar pgsBar;
 
-    private static StationFinder station;
+
+    EditText latitudeText, longitudeText;
+    private static String searchLat, searchLong;
+
+    static String queryURL = "https://api.openchargemap.io/v3/poi/?output=json&countrycode=CA&latitude=" + searchLat + "&longitude=" + searchLong + "&maxresults=10";
+    String carChargerURL;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,38 +75,82 @@ public class ECSActivity extends AppCompatActivity {
         setContentView(R.layout.activity_ecs_main);
 
 
-
-
-
-
         //get items from the layout
-        ListView list = findViewById(R.id.ecs_listview);
+
         Button searchBtn = findViewById(R.id.search_button);
         Button gotoFavBtn = findViewById(R.id.fav_button);
-        EditText longitudeText = findViewById(R.id.longitude);
-        EditText latitudeText = findViewById(R.id.latitude);
+        longitudeText = findViewById(R.id.longitude);
+        latitudeText = findViewById(R.id.latitude);
         pgsBar = findViewById(R.id.progress);
 
         //show the result from last search
         SharedPreferences prefs = getSharedPreferences("lastSearch", MODE_PRIVATE);
         String lastLatitude = prefs.getString("latitude", "");
         String lastLongitude = prefs.getString("longitude", "");
-
         latitudeText.setText(lastLatitude);
         longitudeText.setText(lastLongitude);
+
+
+       //progress bar
         pgsBar.setVisibility(View.VISIBLE);
         pgsBar.setProgress(0);
 
-        StationFinder station= new StationFinder();
-        station.execute(latitudeText.getText().toString(),longitudeText.getText().toString());
 
-        DatabaseHelper dbOpener = new DatabaseHelper(this);
-        db = dbOpener.getWritableDatabase();
+
 
 
         //toolbar setup
         Toolbar toolbar = findViewById(R.id.ecs_toolbar);
         setSupportActionBar(toolbar);
+
+        ListView list = findViewById(R.id.ecs_listview);
+
+        list.setAdapter(myAdapter = new MyListAdapter());
+
+        list.setOnItemClickListener((parent, view, position, id) -> {
+
+            Intent detail = new Intent(ECSActivity.this, ECSdetail.class);
+
+
+            detail.putExtra("title", searchedStations.get(position).getTitle1());
+            detail.putExtra("latitude", searchedStations.get(position).getLatitude());
+            detail.putExtra("longitude", searchedStations.get(position).getLongitude());
+            detail.putExtra("phoneNo", searchedStations.get(position).getPhoneNo());
+
+
+
+
+            startActivity(detail);
+
+
+        });
+
+
+        //search new stations
+
+        searchBtn.setOnClickListener(v -> {
+
+
+            String searchLat = latitudeText.getText().toString();
+            String searchLong = longitudeText.getText().toString();
+
+
+            //
+          //  station.execute("https://api.openchargemap.io/v3/poi/?output=json&countrycode=CA&latitude="
+                  //  + searchLat + "&longitude=" + searchLong + "&maxresults=10");
+            carChargerURL = queryURL;
+            StationFinder station = new StationFinder();
+            station.execute(carChargerURL);
+
+
+
+
+            pgsBar.setVisibility(View.VISIBLE);
+            pgsBar.setProgress(6);
+
+
+        });
+
 
 
         //go to fav page
@@ -108,242 +160,112 @@ public class ECSActivity extends AppCompatActivity {
         });
 
 
-        //search new stations
-        searchBtn.setOnClickListener(v -> {
-            //set up progress bar
-            pgsBar.setVisibility(View.VISIBLE);
-            pgsBar.setProgress(0);
-            StationFinder sfc = new StationFinder();
-            sfc.execute(latitudeText.getText().toString(),longitudeText.getText().toString());
-
-        });
 
 
-        //populate rows for the listview
-        list.setAdapter(myAdapter = new MyListAdapter());
-
-
-
-        //set click listener for each item to open the detail page
-        list.setOnItemClickListener((parent, view, position, id) -> {
-
-            Bundle data = new Bundle();
-            data.putString("title", searchedStations.get(position).getTitle1());
-            data.putString("latitude", searchedStations.get(position).getLatitude());
-            data.putString("longitude", searchedStations.get(position).getLongitude());
-            data.putString("phoneNo", searchedStations.get(position).getPhoneNo());
-            data.putString("address", searchedStations.get(position).getAddress());
-            data.putBoolean("fav", searchedStations.get(position).isFav());
-
-
-            Intent detail = new Intent(ECSActivity.this, ECSdetail.class);
-            detail.putExtras(data);
-            startActivityForResult(detail, 1);
-
-
-        });
 
     }
 
 
-    @Override
-    protected void onStop() {
-        super.onStop();
-        EditText latitude = findViewById(R.id.latitude);
-        EditText longitude = findViewById(R.id.longitude);
-
-        SharedPreferences prefs = getSharedPreferences("lastSearch", MODE_PRIVATE);
-        SharedPreferences.Editor editor = prefs.edit();
-        editor.putString("latitude", latitude.getText().toString());
-        editor.putString("longitude", longitude.getText().toString());
-
-        editor.commit();
-    }
-
-    public void deleteStation(String latitude, String longitude){
-        Cursor cursor = db.query(true, DatabaseHelper.TABLE_NAME,
-                new String[]{DatabaseHelper.COL_ID},
-                DatabaseHelper.COL_LATITUDE + " = ? AND " +
-                        DatabaseHelper.COL_LONGITUDE + " = ? "
-                , new String[]{latitude, longitude}, null, null, null, null);
-        cursor.moveToFirst();
-        if (cursor.getCount() > 0) {
-            int id = cursor.getInt(cursor.getColumnIndex(DatabaseHelper.COL_ID));
-            Log.i("id to be deleted is" + id, "ecsfmain");
-            db.delete(DatabaseHelper.TABLE_NAME, DatabaseHelper.COL_ID + "=?",
-                    new String[]{Long.toString(id)});
-        }
-        cursor.close();
-        Toast.makeText(this, R.string.ecs_Deleted,
-                Toast.LENGTH_SHORT).show();
-        for (ECStations station : searchedStations) {
-            if (station.getLongitude().equals(longitude)) {
-                station.setFav(false);
-                break;
-            }
-        }
-        myAdapter.notifyDataSetChanged();
-    }
 
 
-    public void addStation(String title, String latitude, String longitude, String address, String phoneNo){
-        ContentValues cv = new ContentValues();
-        cv.put(DatabaseHelper.COL_TITLE, title);
-        cv.put(DatabaseHelper.COL_LATITUDE, latitude);
-        cv.put(DatabaseHelper.COL_LONGITUDE, longitude);
-        cv.put(DatabaseHelper.COL_PHONENO, phoneNo);
-        cv.put(DatabaseHelper.COL_ADDRESS, address);
+    public class StationFinder extends AsyncTask<String, Integer, String> {
+        String title, latitude, longitude, phoneNo;
 
-        db.insert(DatabaseHelper.TABLE_NAME, null, cv);
-
-        Toast.makeText(this, R.string.ecs_station_added,
-                Toast.LENGTH_SHORT).show();
-
-        //update current list to reflect the saved stations
-        for (ECStations station : searchedStations) {
-            if (station.getLongitude().equals(longitude)) {
-                station.setFav(true);
-                break;
-            }
-        }
-        myAdapter.notifyDataSetChanged();
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (data == null) {
-
-        }
-//from detail page to add station to fav/db
-        else if (requestCode == 1 && resultCode == 2) {
-
-            //if the data need to be added to fav
-            if (data.getBooleanExtra("addToFav", false)) {
-                String title = data.getStringExtra("title");
-                String latitude = data.getStringExtra("latitude");
-                String longitude = data.getStringExtra("longitude");
-                String phoneNo = data.getStringExtra("phoneNo");
-                String address = data.getStringExtra("address");
-
-                addStation(title,latitude, longitude, address, phoneNo);
-
-            }
-        }
-// from detail page to delete one station from fav
-        else if (requestCode == 1 && resultCode == 3) {
-            // if the data is needed to be deleted from favorite stations
-            if (data.getBooleanExtra("deleteFromFav", false)) {
-                String latitude = data.getStringExtra("latitude");
-                String longitude = data.getStringExtra("longitude");
-                deleteStation(latitude,longitude);
-            }
-        }
-        //from favpage
-        else if (requestCode == 1 && resultCode == 6) {
-
-            int numOfDel = data.getIntExtra("numOfDel", 0);
-            String latitude;
-            for (int i = 0; i <= numOfDel; i++) {
-                latitude = data.getStringExtra(i + "");
-                for (ECStations station : searchedStations) {
-                    if (station.getLatitude().equals(latitude)) {
-                        station.setFav(false);
-                        break;
-                    }
-                }
-            }
-            myAdapter.notifyDataSetChanged();
-
-        }
-    }
-
-
-    public static class StationFinder extends AsyncTask<String, Integer, ArrayList<ECStations>> {
-        ArrayList<ECStations> newStations = new ArrayList<>();
 
         @Override
-        protected ArrayList<ECStations> doInBackground(String... strings) {
-            String urlLatitude = "45.347571";
-            String urlLongitude = "-75.756140";
-            if(!strings[0].equals("")&& !strings[1].equals("")){
-                urlLatitude = strings[0];
-                urlLongitude = strings[1];
-            }
+        protected String doInBackground(String... strings) {
 
-            String queryURL = "https://api.openchargemap.io/v3/poi/?output=json&latitude="
-                    +urlLatitude+"&longitude="+urlLongitude+"&maxresults=10";
+            String ret = null;
 
-            try {
-                URL url = new URL(queryURL);
+            try {       // Connects to the server using the internet
+                URL url = new URL(strings[0]);
                 HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
-                publishProgress(2);
                 InputStream inStream = urlConnection.getInputStream();
+                publishProgress(25);
 
-                //Set up the JSON object parser:
-                // json is UTF-8 by default
+                // Sets up the JSON object parser
                 BufferedReader reader = new BufferedReader(new InputStreamReader(inStream, "UTF-8"), 8);
                 StringBuilder sb = new StringBuilder();
 
-                String line;
-                int progressCount = 10;
+                // Reads the contents of the JSON input and saves results as a string
+                String line = null;
                 while ((line = reader.readLine()) != null) {
                     sb.append(line + "\n");
-                    publishProgress(progressCount++);
                 }
                 String result = sb.toString();
-                JSONArray jResults = new JSONArray(result);
-                for (int i = 0; i < jResults.length(); i++) {
-                    JSONObject addressInfo = jResults.getJSONObject(i).getJSONObject("AddressInfo");
-                    String title = addressInfo.getString("Title");
-                    String latitude = addressInfo.getDouble("Latitude") + "";
-                    String longitude = addressInfo.getDouble("Longitude") + "";
-                    String phoneNo = addressInfo.getString("ContactTelephone1");
-                    String address = addressInfo.getString("AddressLine1");
-                    newStations.add(new ECStations(title, latitude, longitude, phoneNo, address));
+
+                // Saves the string of results in a JSON array
+                JSONArray jsonArray = new JSONArray(result);
+                publishProgress(50);
+
+                // Iterates over the array by JSON object
+                for (int i = 0; i < jsonArray.length(); i++) {
+                    JSONObject jsonObject1 = jsonArray.getJSONObject(i);
+                    // Accesses the "addressInfo" object within the 1st JSON object
+                    JSONObject jsonObject2 = jsonObject1.getJSONObject("AddressInfo");
+                    // Below strings are accesses from within the inner JSON object
+                    String title = jsonObject2.getString("title");
+                    this.title = title;
+                    String lat = jsonObject2.getString("latitude");
+                    latitude = lat;
+                    String lon = jsonObject2.getString("longitude");
+                    longitude = lon;
+                    String phone = jsonObject2.getString("contactTelephone1");
+
+                    if (phone != "null") {
+                        phoneNo = phone;
+                    } else {
+                        phoneNo = "N/A";
+                    }
+                    // Adds the new message to the ArrayList
+                    searchedStations.add(new ECStations(this.title, latitude, longitude, phoneNo));
+
+                    publishProgress(75);
                 }
-                urlConnection.disconnect();
-                inStream.close();
+
+                // Catches various exceptions from above Try block
             } catch (MalformedURLException mfe) {
-                mfe.printStackTrace();
+                ret = "Malformed URL Exception";
             } catch (IOException ioe) {
-                ioe.printStackTrace();
-            } catch (JSONException json) {
-                json.printStackTrace();
+                ret = "IO Exception. Is the Wifi connected?";
+            } catch (JSONException jse) {
+                ret = "JSON Exception";
             }
-            return newStations;
+            // What is returned here will be passed as a parameter to onPostExecute
+            return ret;
         }
+
+
 
 
         @Override                   //Type 3
-        protected void onPostExecute(ArrayList<ECStations> newStations) {
-            super.onPostExecute(newStations);
+        protected void onPostExecute(String result) {
+            super.onPostExecute(result);
 
-            searchedStations = newStations;
+            searchedStations.clear();
+            ListView searchList = findViewById(R.id.ecs_listview);
+            searchList.setAdapter(myAdapter = new MyListAdapter());
 
-            myAdapter.notifyDataSetChanged();
-            pgsBar.setVisibility(View.GONE);
-            Cursor cursor = null;
-            //check if already saved
-            if (searchedStations.size() > 0) {
-                for (ECStations station : searchedStations) {
-                    cursor = db.query(false, DatabaseHelper.TABLE_NAME, new String[]{DatabaseHelper.COL_ADDRESS},
-                            DatabaseHelper.COL_LATITUDE + " =? AND " + DatabaseHelper.COL_LONGITUDE + "=?",
-                            new String[]{station.getLatitude(), station.getLongitude()}, null, null, null, null);
-                    if (cursor.getCount() > 0) {
-                        station.setFav(true);
-                    }
-                }
-                cursor.close();
-            }
-        }
 
-        @Override                       //Type 2
+
+
+
+}
+
+        @Override
         protected void onProgressUpdate(Integer... values) {
             super.onProgressUpdate(values);
-            pgsBar.setProgress(values[0]);
+            // Updates GUI stuff only.setVisibility(View.VISIBLE);
+
         }
-    }
+
+
+
+        }
+
+
+
+
 
     class MyListAdapter extends BaseAdapter {
         @Override
@@ -352,35 +274,33 @@ public class ECSActivity extends AppCompatActivity {
         }
 
         @Override
-        public Object getItem(int i) {
-            return searchedStations.get(i);
+        public ECStations getItem(int position) {
+            return searchedStations.get(position);
         }
 
         @Override
-        public long getItemId(int i) {
-            return i;
+        public long getItemId(int position) {
+            return position;
         }
 
         @Override
         public View getView(int position, View oldView, ViewGroup parent) {
             View thisView = oldView;
-            thisView = getLayoutInflater().inflate(R.layout.list_view_ecs, parent, false);
 
-            TextView title = thisView.findViewById(R.id.row_title);
-            TextView address = thisView.findViewById(R.id.row_address);
-            ImageView saved = thisView.findViewById(R.id.row_saved);
+            if (oldView == null)
+                thisView = getLayoutInflater().inflate(R.layout.list_view_ecs, null);
 
-            if (!searchedStations.get(position).isFav()) {
-                saved.setVisibility(View.GONE);
+                TextView itemText = thisView.findViewById(R.id.row_title);
+                ECStations ecs = getItem(position);
+                itemText.setText(ecs.getTitle1());
+
+
+                return thisView;
             }
-            title.setText(searchedStations.get(position).getTitle1());
-            address.setText(searchedStations.get(position).getAddress());
-            return thisView;
+
+
         }
     }
 
-
-
-}
 
 

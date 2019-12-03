@@ -3,53 +3,52 @@ package com.example.androidlabs;
 public class ECStations extends ECSfavorite {
 
 
-    private String title;
-
+    private String title ;
     private String latitude;
 
     private String longitude;
 
     private String phoneNo;
 
-    private String address;
 
-    private boolean fav;
+
+    private long id;
 
 
     public ECStations(){
-        this.title = "Unknown";
-        this.latitude = "Unknown";
-        this.longitude = "Unknown";
-        this.phoneNo = "Unknown";
-        this.address = "Unknown";
-        this.fav = false;
+
+
     }
 
 
-    public ECStations(String title, String latitude, String longitude, String phoneNo, String address){
+    public ECStations(String title, String latitude, String longitude, String phoneNo){
         this.title = title;
         this.longitude = longitude;
         this.latitude = latitude;
         this.phoneNo = phoneNo;
-        this.address = address;
-        this.fav = false;
+
+
+    }
+
+    public ECStations(long id, String title, String latitude, String longitude, String phoneNo){
+        this.title = title;
+        this.longitude = longitude;
+        this.latitude = latitude;
+        this.phoneNo = phoneNo;
+        this.id = id;
+
     }
 
 
-    public ECStations(ECStations station){
-        this(station.title,station.latitude,station.longitude,station.phoneNo,station.address);
-        this.setFav(station.isFav());
-
-    }
 
 
     public String getTitle1() {
         return title;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
+   // public void setTitle(String title) {
+     //   this.title = title;
+ //   }
 
 
     public String getLatitude() {
@@ -66,19 +65,12 @@ public class ECStations extends ECSfavorite {
         return phoneNo;
     }
 
-    public String getAddress() {
-        return address;
+
+
+
+    public Long getId() {
+        return id;
     }
-
-
-    public boolean isFav() {
-        return fav;
-    }
-
-    public void setFav(boolean fav) {
-        this.fav = fav;
-    }
-
 }
 
 
