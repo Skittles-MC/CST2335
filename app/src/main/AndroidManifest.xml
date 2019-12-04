@@ -21,9 +21,13 @@
         </activity>
 
         <!--        PLACEHOLDER TEXT-->
-        <activity android:name=".FoodRecipePage" />
-        <activity android:name=".NewsArticlePage" />
-        <activity android:name=".CurrencyExchangePage" />
+
+        <activity android:name=".NewsArticleHelper"/>
+        <activity android:name=".NewsArticleDetails" />
+        <activity android:name=".MainNewsPage" />
+
+<!--        <activity android:name=".FoodRecipePage" />-->
+<!--        <activity android:name=".CurrencyExchangePage" />-->
 
         <activity android:name=".ECSActivity" />
         <activity android:name=".ECSfavorite"/>

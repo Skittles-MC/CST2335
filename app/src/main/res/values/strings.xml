@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Android Labs</string>
+    <string name="app_name">Android Final Group Project Fall 2019</string>
     <string name="hello_message">Hello World!</string>
     <string name="ButtonText">I\’m a button</string>
     <string name="ecs_Long">Longitude</string>
@@ -10,5 +10,32 @@
     <string name="ecs_Deleted"> Delete Successful </string>
     <string name="ecs_station_added">Station successfully added!</string>
     <string name="ecs_delete">Delete</string>
+    <string name="toolbarOption1">About/Help</string>
+
+    <string name="recipes">Recipes page</string>
+    <string name="news">News page</string>
+    <string name="car_chargers">Car Chargers page</string>
+    <string name="currency_exchange">Currency Exchange page</string>
+
+
+
+
+    <string name="aboutHelp1">Activity Name: News API</string>
+    <string name="aboutHelp2">Activity Version number: V1.3</string>
+    <string name="aboutHelp3">Student Name: Martin Choy</string>
+    <string name="aboutHelp4">How to Use:</string>
+
+    <string name="list">
+    <li> 1. Tap the search bar. Type in something like "Food" or "Tesla".</li>\n
+        \n
+    <li>2. Afterwards hit the search Button</li>\n
+        \n
+    <li>3. A list of articles will pop up after some loading, you can select one of them and will have the option to "Save to Favourites"</li>\n
+        \n
+    <li>4. You can access your saved articles under the Top Right drop down menu (Saved Favourites) where you can re-open them or delete them.</li>\n
+    </string>
+
+
+    <string name="toolbarOption2">Saved Favourites</string>
 </resources>
 
