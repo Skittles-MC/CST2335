@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+
+    <!--    PLACEHOLDER FOR YOUR STUFF -->
+    <item
+        android:id="@+id/currency_exchange_main_page"
+        android:icon="@drawable/currencyexchange"
+        android:title="@string/currency_exchange"
+        app:showAsAction="always" />
+    <!--    PLACEHOLDER FOR YOUR STUFF -->
+    <item
+        android:id="@+id/car_charger_main_page"
+        android:icon="@drawable/electriccar"
+        android:title="@string/car_chargers"
+        app:showAsAction="always" />
+    <!--    PLACEHOLDER FOR YOUR STUFF -->
+    <item
+        android:id="@+id/recipe_main_page"
+        android:icon="@drawable/cookingbook"
+        android:title="@string/recipes"
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/news_main_page"
+        android:icon="@drawable/newspaper"
+        android:title="@string/news"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/go_to_app_help"
+        app:showAsAction="never"
+        android:title="@string/toolbarOption1" />
+
+    <item
+        android:id="@+id/go_to_app_favourites"
+        app:showAsAction="never"
+        android:title="@string/toolbarOption2" />
+</menu>

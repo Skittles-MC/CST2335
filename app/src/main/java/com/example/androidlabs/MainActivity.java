@@ -27,12 +27,13 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-        newsArticleAPI.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-//                Intent goToNewsPage = new Intent(MainActivity.this, ChatRoomActivity.class);
-//                startActivity(goToNewsPage);
-            }
+        newsArticleAPI.setOnClickListener(v -> {
+           // @Override
+           // public void onClick(View view) {
+            //    Intent goToMainNewsPage = new Intent(MainActivity.this, MainNewsPage.class);
+           //     startActivity(goToMainNewsPage);
+           // }
+                   startActivity(new Intent(MainActivity.this, MainNewsPage.class));
         });
 
 
