@@ -21,6 +21,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import java.io.IOException;
 import java.net.HttpURLConnection;
@@ -59,6 +60,8 @@ public class SingleRecipe extends AppCompatActivity {
         /**
          * initializing the class variables
          */
+        Toolbar tBar = (Toolbar) findViewById(R.id.navigation_toolbar);
+        setSupportActionBar(tBar);
         progressBar = new ProgressBar(this);
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
         progressBar.setVisibility(View.VISIBLE);
