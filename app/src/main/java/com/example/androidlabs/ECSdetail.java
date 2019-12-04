@@ -36,7 +36,7 @@ public class ECSdetail extends AppCompatActivity {
             String title = info.getStringExtra("title");
             String latitude = info.getStringExtra("latitude");
             String longitude = info.getStringExtra("longitude");
-            String address = info.getStringExtra("address");
+
             String phoneNo = info.getStringExtra("phoneNo");
 
 
@@ -51,7 +51,7 @@ public class ECSdetail extends AppCompatActivity {
             titleView.setText("Title: " + title);
             latitudeView.setText("Latitude: " + latitude);
             longitudeView.setText("Longitude: " + longitude);
-            phoneNoView.setText("Address: " + address);
+
 
             if (phoneNo.equals("null") || phoneNo.equals("")) {
                 phoneNoView.setText("Phone Number: Not Available");
@@ -78,7 +78,7 @@ public class ECSdetail extends AppCompatActivity {
                 newRow.put(DatabaseHelper.COL_LATITUDE, latitude);
                 newRow.put(DatabaseHelper.COL_LONGITUDE, longitude);
                 newRow.put(DatabaseHelper.COL_PHONENO, phoneNo);
-                newRow.put(DatabaseHelper.COL_ADDRESS, address);
+
 
                 litedb.insert(DatabaseHelper.TABLE_NAME, null, newRow);
 

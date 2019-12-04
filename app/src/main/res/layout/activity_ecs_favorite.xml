@@ -14,5 +14,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:transcriptMode="alwaysScroll" />
+    <Button
+        android:id="@+id/backbuttonfav"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/ecs_back"
+        />
 
 </LinearLayout>

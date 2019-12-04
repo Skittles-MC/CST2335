@@ -18,12 +18,12 @@ import org.json.JSONObject;
 import java.io.BufferedReader;
 
 
-import android.database.sqlite.SQLiteDatabase;
+
 import android.os.AsyncTask;
 import android.widget.Button;
 import android.widget.EditText;
 
-import android.widget.ListAdapter;
+
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -54,8 +54,7 @@ public class ECSActivity extends AppCompatActivity {
 
     private static ArrayList<ECStations> searchedStations = new ArrayList<>();
 
-    SharedPreferences.Editor editor;
-    SharedPreferences searchCoordinates;
+
 
 
     BaseAdapter myAdapter;
@@ -85,24 +84,18 @@ public class ECSActivity extends AppCompatActivity {
 
         //show the result from last search
         SharedPreferences prefs = getSharedPreferences("lastSearch", MODE_PRIVATE);
-        String lastLatitude = prefs.getString("latitude", "");
-        String lastLongitude = prefs.getString("longitude", "");
+        String lastLatitude = prefs.getString("latitude", "44");
+        String lastLongitude = prefs.getString("longitude", "-71");
 
 
-
-       //progress bar
+        //progress bar
         pgsBar.setVisibility(View.VISIBLE);
         pgsBar.setProgress(0);
 
 
 
 
-
-        //toolbar setup
-        Toolbar toolbar = findViewById(R.id.ecs_toolbar);
-        setSupportActionBar(toolbar);
-
-        ListView list = findViewById(R.id.ecs_listview);
+        ListView list = findViewById(R.id.ecslistview);
 
         list.setAdapter(myAdapter = new MyListAdapter());
 
@@ -117,8 +110,6 @@ public class ECSActivity extends AppCompatActivity {
             detail.putExtra("phoneNo", searchedStations.get(position).getPhoneNo());
 
 
-
-
             startActivity(detail);
 
 
@@ -127,19 +118,21 @@ public class ECSActivity extends AppCompatActivity {
         latitudeText.setText(lastLatitude);
         longitudeText.setText(lastLongitude);
         //search new stations
-        Button searchBtn = findViewById(R.id.search_button);
-        searchBtn.setOnClickListener(v -> {
+        Button searchBtn = findViewById(R.id.search_button1);
+        if (searchBtn != null) {
+
+            searchBtn.setOnClickListener(v -> {
 
 
-            String searchLat = latitudeText.getText().toString();
-            String searchLong = longitudeText.getText().toString();
+                String searchLat = latitudeText.getText().toString();
+                String searchLong = longitudeText.getText().toString();
 
-            carChargerURL = queryURL + searchLat + "&longitude=" + searchLong;
-            StationFinder station = new StationFinder();
-            station.execute(carChargerURL);
+                carChargerURL = queryURL + searchLat + "&longitude=" + searchLong;
+                StationFinder station = new StationFinder();
+                station.execute(carChargerURL);
 
-        });
-
+            });
+        }
 
 
         //go to fav page
@@ -191,7 +184,7 @@ public class ECSActivity extends AppCompatActivity {
                 for (int i = 0; i < jsonArray.length(); i++) {
                     JSONObject jsonObject1 = jsonArray.getJSONObject(i);
                     // Accesses the "addressInfo" object within the 1st JSON object
-                    JSONObject jsonObject2 = jsonObject1.getJSONObject("AddressInfo");
+                    JSONObject jsonObject2 = jsonObject1.getJSONObject("addressInfo");
                     // Below strings are accesses from within the inner JSON object
                     String title = jsonObject2.getString("title");
                     this.title = title;
@@ -216,7 +209,7 @@ public class ECSActivity extends AppCompatActivity {
             } catch (MalformedURLException mfe) {
                 ret = "Malformed URL Exception";
             } catch (IOException ioe) {
-                ret = "IO Exception. Is the Wifi connected?";
+                ret = "IO Exception.";
             } catch (JSONException jse) {
                 ret = "JSON Exception";
             }
@@ -232,7 +225,7 @@ public class ECSActivity extends AppCompatActivity {
             super.onPostExecute(sentFromDoInBackground);
 
             searchedStations.clear();
-            ListView searchList = findViewById(R.id.ecs_listview);
+            ListView searchList = findViewById(R.id.ecslistview);
             searchList.setAdapter(myAdapter = new MyListAdapter());
 
 

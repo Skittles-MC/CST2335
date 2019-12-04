@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -71,7 +72,10 @@ public class ECSfavorite  extends AppCompatActivity {
         }
 
 
+        Button back = findViewById(R.id.backbuttonfav);
 
+
+        back.setOnClickListener(v -> finish());
 
 
 

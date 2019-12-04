@@ -25,7 +25,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     public static final String COL_PHONENO = "Phone";
 
-    public static final String COL_ADDRESS = "Address";
+
 
 
     public DatabaseHelper (Activity ctx) {
@@ -42,8 +42,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 + COL_TITLE + " TEXT, "
                 + COL_LATITUDE + " TEXT, "
                 + COL_LONGITUDE + " TEXT, "
-                + COL_PHONENO + " TEXT, "
-                + COL_ADDRESS + " TEXT)");
+                + COL_PHONENO + " TEXT)");
     }
 
 

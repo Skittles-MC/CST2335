@@ -38,7 +38,7 @@
         android:inputType="numberSigned" />
 
     <Button
-        android:id="@+id/search_button"
+        android:id="@+id/search_button1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/ecs_search"
@@ -60,7 +60,7 @@
 
 
     <ListView
-        android:id="@+id/ecs_listview"
+        android:id="@+id/ecslistview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
