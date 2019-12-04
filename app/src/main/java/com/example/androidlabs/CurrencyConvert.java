@@ -38,12 +38,22 @@ import okhttp3.Response;
  * This is Currency Converter Class
  * --------------------------------------------------
  * SharedPreferences saves the last Converted Currency
- * Parsing and fetching from JSON to the ListView
+ * populating JSON to the ListView
  * Calculating different currencies
  * from different countries
  *
+ * OnCreate Method
+ *ListView, ArrayList,populating the JSON to ListView
  *
+ * OnPause()
+ * Getting the Conversion
  *
+ * Class AsyncTask
+ * fetching from JSON
+ *
+ * onPreExecute()
+ * parsing all the information from JSON
+ * JSON URL
  *
  *
 ***************************************************/
@@ -52,7 +62,6 @@ import okhttp3.Response;
 
 
 public class CurrencyConvert extends AppCompatActivity {
-    Toolbar toolbar;
     EditText inputNumber;
     TextView title, outputConvert;
     Button button;
@@ -66,7 +75,8 @@ public class CurrencyConvert extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_convert);
-        toolbar =  findViewById(R.id.toolbar);
+        Toolbar toolbar =  findViewById(R.id.navigation_toolbar);
+        setSupportActionBar(toolbar);
         prefs = getApplicationContext().getSharedPreferences("data", Context.MODE_PRIVATE);
         title = findViewById(R.id.Title);
         inputNumber = findViewById(R.id.Input);
@@ -112,7 +122,7 @@ public class CurrencyConvert extends AppCompatActivity {
 
 
         listView.setAdapter(adapter);
-//List of Currency
+        //List of Currency
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView parent, View view, int position, long id) {
@@ -163,14 +173,14 @@ public class CurrencyConvert extends AppCompatActivity {
 
 
 
-//Parsing in json
+        //Parsing in json
         @Override
         protected Void doInBackground(String... params) {
             String curs = convertFrom + "," + convertTo;
             OkHttpClient client = new OkHttpClient();
             if (convertFrom.equals("EUR")) curs = convertTo;
             if (convertTo.equals("EUR")) curs = convertFrom;
-//json URL
+        //json URL
             Request request = new Request.Builder().url("https://api.exchangeratesapi.io/latest?symbols=" + curs).build();
 
             try {
@@ -181,10 +191,7 @@ public class CurrencyConvert extends AppCompatActivity {
             }
             return null;
         }
-/*
-*
-*
-* */
+
         @Override
         protected void onPreExecute() {
             dialog.setMessage("Converting...");
@@ -272,8 +279,7 @@ public class CurrencyConvert extends AppCompatActivity {
 
 
             case R.id.go_to_app_favourites:
-                Intent goToNewsFavourites = new Intent(CurrencyConvert .this, NewsArticleHelper .class);
-                CurrencyConvert .this.startActivityForResult(goToNewsFavourites, 10);
+
                 break;
 
 
@@ -285,10 +291,10 @@ public class CurrencyConvert extends AppCompatActivity {
     }
 
 
-
+//This method is for help
 
     public void helpAlert() {
-        View middle = getLayoutInflater().inflate(R.layout.news_about_help, null);
+        View middle = getLayoutInflater().inflate(R.layout.converthelp, null);
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder
