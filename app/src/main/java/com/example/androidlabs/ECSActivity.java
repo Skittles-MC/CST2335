@@ -85,6 +85,15 @@ public class ECSActivity extends AppCompatActivity {
     EditText latitudeText, longitudeText;
     String queryURL = "https://api.openchargemap.io/v3/poi/?output=json&countrycode=CA&camelcase=true&maxresults=10&latitude=";
     String carChargerURL;
+    protected SharedPreferences.Editor edit;
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        edit.putString("lastSearch", latitudeText.getText().toString());
+        edit.putString("lastSearch", longitudeText.getText().toString());
+        edit.commit();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -104,18 +113,23 @@ public class ECSActivity extends AppCompatActivity {
 
         //show the result from last search
         SharedPreferences prefs = getSharedPreferences("lastSearch", MODE_PRIVATE);
+        edit = prefs.edit();
         String lastLatitude = prefs.getString("latitude", "44");
+
         String lastLongitude = prefs.getString("longitude", "-71");
+
 
         latitudeText.setText(lastLatitude);
         longitudeText.setText(lastLongitude);
+
+
 
         //progress bar
         pgsBar.setVisibility(View.VISIBLE);
         pgsBar.setProgress(10);
 
-        ListView list = findViewById(R.id.listviewecs);
-        list.setAdapter(myAdapter = new MyListAdapter());
+       ListView list = findViewById(R.id.listviewecs);
+//        list.setAdapter(myAdapter = new MyListAdapter());
         list.setOnItemClickListener((parent, view, position, id) -> {
 
             Intent detail = new Intent(ECSActivity.this, ECSdetail.class);
