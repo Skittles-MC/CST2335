@@ -6,6 +6,7 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
+        android:usesCleartextTraffic="true"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -26,6 +27,12 @@
         <activity android:name=".NewsArticleDetails" />
         <activity android:name=".MainNewsPage" />
 
+        <activity android:name=".ListViewOfRecipe"/>
+        <activity android:name=".SingleRecipe"/>
+        <activity android:name=".PopulateDataBaseRecipe"/>
+        <activity android:name=".HelperMenuRecipe"/>
+        <activity android:name=".MainActivityRecipe"/>
+
 <!--        <activity android:name=".FoodRecipePage" />-->
 <!--        <activity android:name=".CurrencyExchangePage" />-->
 
@@ -34,6 +41,7 @@
         <activity android:name=".ECStations" />
         <activity android:name="ECSdetail"
             android:windowSoftInputMode="stateHidden"/>
+
     </application>
 
 </manifest>

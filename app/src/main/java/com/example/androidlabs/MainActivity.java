@@ -42,6 +42,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
 //                Intent goToFoodPage = new Intent(MainActivity.this, ChatRoomActivity.class);
 //                startActivity(goToFoodPage);
+                startActivity(new Intent(MainActivity.this, MainActivityRecipe.class));
             }
         });
 
