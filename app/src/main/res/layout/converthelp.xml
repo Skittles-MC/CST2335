@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+<!--    Activity Name:-->
+    <TextView
+        android:id="@+id/aboutConvert"
+        android:text="@string/Name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        />
+<!--    Activity Version number: V1.3-->
+    <TextView
+        android:id="@+id/aboutConvert2"
+        android:text="@string/Ver"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        />
+
+    <TextView
+        android:id="@+id/aboutConvert3"
+        android:text="@string/Stud"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        />
+<!--    How to Use:-->
+    <TextView
+        android:id="@+id/aboutConvert4"
+        android:text="@string/lista"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        />
+<!--    1. Tap the search bar. type in something like "Food" or "Tesla".-->
+<!--    2. Afterwards hit the search Button-->
+<!--    3. A list of articles will pop up after some loading, you can select one of them and will have the option to "Save to Favourites"-->
+<!--    4. You can access your saved articles under the Top Right drop down menu (Saved Favourites) where you can re-open them or delete them.-->
+
+</LinearLayout>

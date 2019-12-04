@@ -40,5 +40,23 @@
     <li>4. You can access your saved articles under the Top Right drop down menu (Saved Favourites) where you can re-open them or delete them.</li>\n
     </string>
 
+
+    <string name="Name">Pangalan: Palitan</string>
+    <string name="Ver">Version Activity: V1.3</string>
+    <string name="Stud">Pangalan: Rozil Gene Maranan</string>
+    <string name="Use">Paano Gamitin:</string>
+
+
+    <string name="lista">
+    <li> 1. Itype ang numero.</li>\n
+        \n
+    <li>2. Pumili ng country pera</li>\n
+        \n
+    <li>3. pumili ng country kung anung pera</li>\n
+        \n
+    <li>4. pindotin ang convert button.</li>\n
+    </string>
+
+
 </resources>
 
