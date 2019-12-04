@@ -16,6 +16,23 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+/**
+ * Page to display details of saved electric car charging stations
+ */
+
+
+/**
+ * display detailed information about an article
+ * allow user to save to article
+ * send saved article information to database
+ *
+ *
+ * * get article information from news main page
+ *      * Connect and save to database
+ * protected void onCreate(Bundle savedInstanceState)
+ */
+
+
 
 public class ECSdetail extends AppCompatActivity {
 
@@ -36,7 +53,7 @@ public class ECSdetail extends AppCompatActivity {
             String title = info.getStringExtra("title");
             String latitude = info.getStringExtra("latitude");
             String longitude = info.getStringExtra("longitude");
-            String address = info.getStringExtra("address");
+
             String phoneNo = info.getStringExtra("phoneNo");
 
 
@@ -51,7 +68,7 @@ public class ECSdetail extends AppCompatActivity {
             titleView.setText("Title: " + title);
             latitudeView.setText("Latitude: " + latitude);
             longitudeView.setText("Longitude: " + longitude);
-            phoneNoView.setText("Address: " + address);
+
 
             if (phoneNo.equals("null") || phoneNo.equals("")) {
                 phoneNoView.setText("Phone Number: Not Available");
@@ -78,7 +95,7 @@ public class ECSdetail extends AppCompatActivity {
                 newRow.put(DatabaseHelper.COL_LATITUDE, latitude);
                 newRow.put(DatabaseHelper.COL_LONGITUDE, longitude);
                 newRow.put(DatabaseHelper.COL_PHONENO, phoneNo);
-                newRow.put(DatabaseHelper.COL_ADDRESS, address);
+
 
                 litedb.insert(DatabaseHelper.TABLE_NAME, null, newRow);
 

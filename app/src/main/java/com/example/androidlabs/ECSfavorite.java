@@ -12,11 +12,28 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
 
 import java.util.ArrayList;
+
+/**
+ *
+ * Class info:
+ * Page that show saved stations from database
+ *
+ * obtain data from database and display
+ * protected void onCreate(Bundle savedInstanceState) {
+ *
+ *
+ *
+ *
+ *  public boolean onCreateOptionsMenu(Menu menu) {
+ *  inflator for displaying tool bars
+ */
+
 
 
 public class ECSfavorite  extends AppCompatActivity {
@@ -71,7 +88,10 @@ public class ECSfavorite  extends AppCompatActivity {
         }
 
 
+        Button back = findViewById(R.id.backbuttonfav);
 
+
+        back.setOnClickListener(v -> finish());
 
 
 
@@ -80,8 +100,9 @@ public class ECSfavorite  extends AppCompatActivity {
 
     }
 
-
-
+    /**
+     * List Adapter for displaying saved articles
+     */
     private class MyListAdapter extends BaseAdapter {
         @Override
         public int getCount() {

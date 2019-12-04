@@ -34,6 +34,7 @@
         <activity android:name=".ECSActivity" />
         <activity android:name=".ECSfavorite"/>
         <activity android:name=".ECStations" />
+        <activity android:name=".DatabaseHelper"/>
         <activity android:name="ECSdetail"
             android:windowSoftInputMode="stateHidden"/>
     </application>
