@@ -25,9 +25,6 @@
     <string name="aboutHelp3">Student Name: Martin Choy</string>
     <string name="aboutHelp4">How to Use:</string>
 
-
-
-
     <string name="list">
     <li> 1. Tap the search bar. Type in something like "Food" or "Tesla".</li>\n
         \n
@@ -41,20 +38,15 @@
 
     <string name="toolbarOption2">Saved Favourites</string>
 
-    <string name="Name">Activity Name: Currency Converter</string>
-    <string name="Ver">Activity Version number: V1.3</string>
-    <string name="Stud">Student Name: Rozil Gene Maranan</string>
-    <string name="Use">How to Use:</string>
 
 
-    <string name="lista">
-    <li> 1. Enter a number.</li>\n
-        \n
-    <li>2. Your currency</li>\n
-        \n
-    <li>3. Choose which Country Currency that you want to convert to</li>\n
-        \n
-    <li>4.Press the Convert Button.</li>\n
-    </string>
+        <string name="app_namerecipe">Your Fav Recipe</string>
+        <string name="searchrecipe">Search</string>
+        <string name="help1">Click star button to save in Favorite List and Delete</string>
+        <string name="help2">Click once to delete from Favorite List</string>
+
+
+
+
 </resources>
 
