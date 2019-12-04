@@ -87,6 +87,9 @@ public class ECSActivity extends AppCompatActivity {
     String carChargerURL;
     protected SharedPreferences.Editor edit;
 
+    /**
+     * OnPause with Shared Prefs commited
+     */
     @Override
     protected void onPause() {
         super.onPause();
@@ -189,9 +192,9 @@ public class ECSActivity extends AppCompatActivity {
                 Intent goToRecipePage = new Intent(ECSActivity.this, MainNewsPage.class);
                 ECSActivity.this.startActivityForResult(goToRecipePage, 10);
                 break;
-//            case R.id.currency_exchange_main_page:
-//                Intent goToCurrencyExchange = new Intent(ECSActivity.this, MainNewsPage.class);
-//                ECSActivity.this.startActivityForResult(goToCurrencyExchange, 10);
+            case R.id.currency_exchange_main_page:
+              Intent goToCurrencyExchange = new Intent(ECSActivity.this, CurrencyConvert.class);
+               ECSActivity.this.startActivityForResult(goToCurrencyExchange, 10);
 //                break;
 //            case R.id.news_main_page:
 //                Intent goToNewsPage = new Intent(ECSActivity.this, MainNewsPage.class);
