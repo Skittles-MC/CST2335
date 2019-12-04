@@ -15,6 +15,7 @@ import android.widget.SimpleAdapter;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -56,11 +57,15 @@ public class ListViewOfRecipe extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.listviewrecipe);
         /**
          * Initializing the ArrayList
          */
+
+        Toolbar tBar = (Toolbar) findViewById(R.id.navigation_toolbar);
+        setSupportActionBar(tBar);
         recipeDetails=new ArrayList<>();
         Intent intent = getIntent();
         text = intent.getStringExtra("searchRecipe");
@@ -84,7 +89,7 @@ public class ListViewOfRecipe extends AppCompatActivity {
          */
 
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.example_menurecipe, menu);
+        inflater.inflate(R.menu.toolbar, menu);
 
         return true;
     }
@@ -98,11 +103,11 @@ public class ListViewOfRecipe extends AppCompatActivity {
              *what to do when the menu item is selected:
              */
 
-            case R.id.favorite:
+            case R.id.go_to_app_favourites:
                 Intent intentFromMenu = new Intent(ListViewOfRecipe.this, PopulateDataBaseRecipe.class);
                 startActivity(intentFromMenu);
                 break;
-            case R.id.help:
+            case R.id.go_to_app_help:
 
                 Intent helperMenuIntent = new Intent(ListViewOfRecipe.this, HelperMenuRecipe.class);
                 startActivity(helperMenuIntent);
