@@ -54,17 +54,17 @@ public class ECSActivity extends AppCompatActivity {
 
     private static ArrayList<ECStations> searchedStations = new ArrayList<>();
 
+    SharedPreferences.Editor editor;
+    SharedPreferences searchCoordinates;
 
 
-    private static BaseAdapter myAdapter;
+    BaseAdapter myAdapter;
 
     private static ProgressBar pgsBar;
 
 
     EditText latitudeText, longitudeText;
-    private static String searchLat, searchLong;
-
-    static String queryURL = "https://api.openchargemap.io/v3/poi/?output=json&countrycode=CA&latitude=" + searchLat + "&longitude=" + searchLong + "&maxresults=10";
+    String queryURL = "https://api.openchargemap.io/v3/poi/?output=json&countrycode=CA&camelcase=true&maxresults=10&latitude=";
     String carChargerURL;
 
 
@@ -77,7 +77,7 @@ public class ECSActivity extends AppCompatActivity {
 
         //get items from the layout
 
-        Button searchBtn = findViewById(R.id.search_button);
+
         Button gotoFavBtn = findViewById(R.id.fav_button);
         longitudeText = findViewById(R.id.longitude);
         latitudeText = findViewById(R.id.latitude);
@@ -87,8 +87,7 @@ public class ECSActivity extends AppCompatActivity {
         SharedPreferences prefs = getSharedPreferences("lastSearch", MODE_PRIVATE);
         String lastLatitude = prefs.getString("latitude", "");
         String lastLongitude = prefs.getString("longitude", "");
-        latitudeText.setText(lastLatitude);
-        longitudeText.setText(lastLongitude);
+
 
 
        //progress bar
@@ -125,29 +124,19 @@ public class ECSActivity extends AppCompatActivity {
 
         });
 
-
+        latitudeText.setText(lastLatitude);
+        longitudeText.setText(lastLongitude);
         //search new stations
-
+        Button searchBtn = findViewById(R.id.search_button);
         searchBtn.setOnClickListener(v -> {
 
 
             String searchLat = latitudeText.getText().toString();
             String searchLong = longitudeText.getText().toString();
 
-
-            //
-          //  station.execute("https://api.openchargemap.io/v3/poi/?output=json&countrycode=CA&latitude="
-                  //  + searchLat + "&longitude=" + searchLong + "&maxresults=10");
-            carChargerURL = queryURL;
+            carChargerURL = queryURL + searchLat + "&longitude=" + searchLong;
             StationFinder station = new StationFinder();
             station.execute(carChargerURL);
-
-
-
-
-            pgsBar.setVisibility(View.VISIBLE);
-            pgsBar.setProgress(6);
-
 
         });
 
@@ -168,7 +157,7 @@ public class ECSActivity extends AppCompatActivity {
 
 
 
-    public class StationFinder extends AsyncTask<String, Integer, String> {
+    private class StationFinder extends AsyncTask<String, Integer, String> {
         String title, latitude, longitude, phoneNo;
 
 
@@ -239,8 +228,8 @@ public class ECSActivity extends AppCompatActivity {
 
 
         @Override                   //Type 3
-        protected void onPostExecute(String result) {
-            super.onPostExecute(result);
+        protected void onPostExecute(String sentFromDoInBackground) {
+            super.onPostExecute(sentFromDoInBackground);
 
             searchedStations.clear();
             ListView searchList = findViewById(R.id.ecs_listview);
@@ -266,8 +255,7 @@ public class ECSActivity extends AppCompatActivity {
 
 
 
-
-    class MyListAdapter extends BaseAdapter {
+   private class MyListAdapter extends BaseAdapter {
         @Override
         public int getCount() {
             return searchedStations.size();

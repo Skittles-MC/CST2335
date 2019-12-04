@@ -1,6 +1,6 @@
 package com.example.androidlabs;
 
-public class ECStations extends ECSfavorite {
+public class ECStations  {
 
 
     private String title ;

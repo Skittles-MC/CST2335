@@ -114,7 +114,7 @@ public class ECSfavorite  extends AppCompatActivity {
 
 
 
-            title.setText(favStations.get(position).getTitle());
+            title.setText(favStations.get(position).getTitle1());
             latitude.setText(favStations.get(position).getLatitude());
             longitude.setText(favStations.get(position).getLongitude());
             phoneNo.setText(favStations.get(position).getPhoneNo());
