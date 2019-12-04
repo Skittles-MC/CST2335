@@ -22,7 +22,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/ecs_Lat"
-        android:inputType="numberSigned" />
+         />
 
     <TextView
         android:layout_width="match_parent"
@@ -35,7 +35,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/ecs_Long"
-        android:inputType="numberSigned" />
+         />
 
     <Button
         android:id="@+id/search_button1"
@@ -60,7 +60,7 @@
 
 
     <ListView
-        android:id="@+id/ecslistview"
+        android:id="@+id/listviewecs"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 

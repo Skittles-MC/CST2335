@@ -16,6 +16,23 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+/**
+ * Page to display details of saved electric car charging stations
+ */
+
+
+/**
+ * display detailed information about an article
+ * allow user to save to article
+ * send saved article information to database
+ *
+ *
+ * * get article information from news main page
+ *      * Connect and save to database
+ * protected void onCreate(Bundle savedInstanceState)
+ */
+
+
 
 public class ECSdetail extends AppCompatActivity {
 

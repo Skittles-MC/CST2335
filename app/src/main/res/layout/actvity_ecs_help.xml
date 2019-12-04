@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!--    Activity Name: Electric Car Charging Station Finder-->
+    <TextView
+        android:id="@+id/aboutHelp1"
+        android:text="@string/aboutHelp1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        />
+    <!--    Activity Version number: V1.3-->
+    <TextView
+        android:id="@+id/aboutHelp2"
+        android:text="@string/aboutHelp2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        />
+    <!--    Student Name: Mark Daley-->
+    <TextView
+        android:id="@+id/aboutHelp3"
+        android:text="@string/aboutHelp3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        />
+    <!--    How to Use:-->
+    <TextView
+        android:id="@+id/aboutHelp4"
+        android:text="@string/aboutHelp4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        />
+    <!--    1. Enter your search Coordinates into the Latitude and Longitude text boxes-->
+    <!--    2. Afterwards hit the search Button-->
+    <!--    3. A list of locations will load below the search button and you can select one of them.-->
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical|end"
+        android:text="@string/list" />
+</LinearLayout>

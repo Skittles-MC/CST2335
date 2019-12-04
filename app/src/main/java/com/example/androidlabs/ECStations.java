@@ -1,5 +1,13 @@
 package com.example.androidlabs;
 
+/**
+ * no-arg constructor
+ *
+ * overloaded constructor to set long id, String title, String latitude, String longitude, String phoneNo
+ * ECSstation  String title, String latitude, String longitude, String phoneNo)
+ *
+ *
+ */
 public class ECStations  {
 
 

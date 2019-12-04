@@ -369,6 +369,7 @@ public class MainNewsPage extends AppCompatActivity {
         protected void onPostExecute(String s) {
             ProgressBar bar = findViewById(R.id.newsBar);
             bar.setVisibility(View.INVISIBLE);
+
             ListView newsList = findViewById(R.id.newsList);
             newsList.setAdapter(newsAdapter = new MyListAdapter());
 
