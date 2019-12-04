@@ -25,6 +25,8 @@
         <activity android:name=".NewsArticleHelper"/>
         <activity android:name=".NewsArticleDetails" />
         <activity android:name=".MainNewsPage" />
+        <activity android:name=".MyProfile"></activity>
+        <activity android:name=".CurrencyConvert"></activity>
 
 <!--        <activity android:name=".FoodRecipePage" />-->
 <!--        <activity android:name=".CurrencyExchangePage" />-->

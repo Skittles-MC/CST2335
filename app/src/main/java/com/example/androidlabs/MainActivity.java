@@ -49,8 +49,8 @@ public class MainActivity extends AppCompatActivity {
         conversionAPI.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                Intent goToConversionPage = new Intent(MainActivity.this, ChatRoomActivity.class);
-//                startActivity(goToConversionPage);
+                Intent goToConversionPage = new Intent(MainActivity.this, CurrencyConvert.class);
+                startActivity(goToConversionPage);
             }
         });
 
