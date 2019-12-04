@@ -19,25 +19,27 @@
 
 
 
-<!--    TODO: GOTTA TRANSLATE THIS-->
-    <string name="recipes">Recipes page</string>
-    <string name="news">News page</string>
-    <string name="car_chargers">Car Chargers page</string>
-    <string name="currency_exchange">Currency Exchange page</string>
 
-    <string name="aboutHelp1">Activity Name: News API</string>
-    <string name="aboutHelp2">Activity Version number: V1.3</string>
-    <string name="aboutHelp3">Student Name: Martin Choy</string>
-    <string name="aboutHelp4">How to Use:</string>
+    <string name="recipes">Page de recettes</string>
+    <string name="news">PAge de Nouvelle</string>
+    <string name="car_chargers">Page Chargeurs de voiture</string>
+    <string name="currency_exchange">Page d'échange de devises</string>
+
+    <string name="aboutHelp1">Nom de l'activité: API News</string>
+    <string name="aboutHelp2">L'activité version numeraeu: V1.3</string>
+    <string name="aboutHelp3">Nom d'étudiant: Martin Choy</string>
+    <string name="aboutHelp4">Comment utiliser</string>
 
     <string name="list">
-    <li> 1. Tap the search bar. Type in something like "Food" or "Tesla".</li>\n
+    <li>1. Appuyez sur la barre de recherche. Tapez quelque chose comme "Food" ou "Tesla".</li>\n
         <li></li>\n
-    <li>2. Afterwards hit the search Button</li>\n
+    <li>2. Appuyez ensuite sur le bouton de recherche</li>\n
         <li></li>\n
-    <li>3. A list of articles will pop up after some loading, you can select one of them and will have the option to "Save to Favourites"</li>\n
+    <li>
+3. Une liste d'articles apparaîtra après le chargement, vous pouvez en sélectionner un et vous aurez l'option "Enregistrer dans les favoris".</li>\n
         <li></li>\n
-    <li>4. You can access your saved articles under the Top Right drop down menu (Saved Favourites) where you can re-open them or delete them.</li>\n
+    <li>
+4. Vous pouvez accéder aux articles que vous avez enregistrés dans le menu déroulant en haut à droite (Favoris enregistrés), où vous pouvez les rouvrir ou les supprimer.</li>\n
     </string>
 
 
