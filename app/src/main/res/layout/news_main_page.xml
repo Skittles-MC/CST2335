@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <androidx.appcompat.widget.Toolbar
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:id="@+id/navigation_toolbar"
+        />
+
+
+    <EditText
+        android:id="@+id/newsEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Type here"
+
+        />
+    <Button
+        android:id="@+id/newsButton1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="SEARCHHHHH"
+        />
+
+    <ProgressBar
+        android:id="@+id/newsBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="visible"
+        />
+
+    <ListView
+        android:id="@+id/newsList"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:transcriptMode = "alwaysScroll"
+        />
+</LinearLayout>
