@@ -3,7 +3,6 @@ package com.example.androidlabs;
 import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.content.SharedPreferences;
-
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.Menu;
@@ -17,138 +16,110 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
-
-
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.Toolbar;
-
-
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+
+/**********************************************************************
+ Filename: MainNewsPage.java
+ Version: 1.5
+ Authors:	Martin Choy
+ Student No:	040835431
+ Course Name/Number:	CST2335 Mobile Graphical Interface Programming
+ Lab Sect:	013
+ Assignment #: Final Project - 1
+ Assignment name:  Final_GroupProject F19
+ Due Date: Dec 4th 2019 , 11:59PM midnight
+ Submission Date: Dec 4th 2019
+ Professor: Shahzeb Khowaja
+ *********************************************************************/
 
 /**
- *
- * TODO:Organize/reformat imports
- * Class info: Main page with to search and save a news article
- *
- *
- *
- * * onclick method to launch the program and go to different pages
- *      * Toast was used to show user actions
- * public void onCreate(Bundle savedInstanceState) {
- *
- *
- *      onPause method to save shared preferences values
- * protected void onPause(){
- *
- *  method to use inflator for tools bar
- *  public boolean onCreateOptionsMenu(Menu menu) {
- *
- *  used to display tool bars to go to different projects
- *   public boolean onOptionsItemSelected(MenuItem item) {
- *
- *   Displays an Alert Dialog the user with instructions for app use
- *    public void helpAlert() {
- *
- *
- * Customized adapter to manipulate listView
- * private class MyListAdapter extends BaseAdapter {
- *
- *
- *          obtain the number of items
- *          @return number of items on the list
- *
- * public int getCount()
- *
- * obtain the position of item in the array list
- * NewsArticleSetterGetter getItem
- *
- * Update progress bar, list, and adapter
- * protected void onPostExecute
- *
- * update progress
- * protected void onProgressUpdate
- ****/
+ * The main News page which handles the landing page, searching and saving
+ */
 public class MainNewsPage extends AppCompatActivity {
 
     MyListAdapter newsAdapter;
     ArrayList<NewsArticleSetterGetter> newsLog = new ArrayList();
-    ProgressBar bar;
+    ProgressBar mainToolBar;
     String queryURL = "https://newsapi.org/v2/everything?apiKey=acd83f1c540645bf94509063a0219b64&q=";
     String newsURL;
 
-    protected SharedPreferences prefs;
-    protected EditText searchEditText;
+    protected SharedPreferences newsPrefs;
+    protected EditText editTextSearch;
     protected SharedPreferences.Editor edit;
 
 
-
+    /**
+     * onCreate - Main purpose of this method is a staging area to deploy
+     *  key features of the application. Also leads to other layouts/pages
+     * @param savedInstanceState
+     */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.news_main_page);
 
-        //TODO: VARS
-        ListView newsList = findViewById(R.id.newsList);
-        newsList.setAdapter(newsAdapter = new MyListAdapter());
-        bar = findViewById(R.id.newsBar);
-        bar.setVisibility(View.INVISIBLE);
-        bar.setProgress(25);
-        searchEditText = findViewById(R.id.newsEditText);
-        Toolbar tBar = (Toolbar) findViewById(R.id.navigation_toolbar);
-        setSupportActionBar(tBar);
+        ListView mainNewsListViewer = findViewById(R.id.newsListView);
+        mainNewsListViewer.setAdapter(newsAdapter = new MyListAdapter());
+        mainToolBar = findViewById(R.id.newsProgessBar);
+        mainToolBar.setVisibility(View.INVISIBLE);
+        mainToolBar.setProgress(30);
+        editTextSearch = findViewById(R.id.newsSearchText);
+        Toolbar mainToolBar = (Toolbar) findViewById(R.id.navigation_toolbar);
+        setSupportActionBar(mainToolBar);
 
-        newsList.setOnItemClickListener((lv, vw, pos, id) -> {
-            Toast.makeText(MainNewsPage.this, "You clicked on: " + newsLog.get(pos).getTitle(), Toast.LENGTH_SHORT).show();
+        mainNewsListViewer.setOnItemClickListener((lv, vw, pos, id) -> {
 
-
-            //TODO:ADD MORE CONTENT
-            Intent goToPage2 = new Intent(MainNewsPage.this, NewsArticleDetails.class);
-            goToPage2.putExtra("newsTitle", newsLog.get(pos).getTitle());
-            goToPage2.putExtra("newsDescription", newsLog.get(pos).getDescription());
-            goToPage2.putExtra("newsURL", newsLog.get(pos).getUrl());
-            startActivity(goToPage2);
+            Intent goToPageNews2 = new Intent(MainNewsPage.this, NewsArticleDetails.class);
+            goToPageNews2.putExtra("newsArticleTitleMain", newsLog.get(pos).getTitle());
+            goToPageNews2.putExtra("newsArticleDescription1", newsLog.get(pos).getDescription());
+            goToPageNews2.putExtra("newsURL", newsLog.get(pos).getUrl());
+            startActivity(goToPageNews2);
         });
 
-        Button searchButton = findViewById(R.id.newsButton1);
+        Button searchButton = findViewById(R.id.newsButtonSearch);
         searchButton.setOnClickListener(clik ->{
             newsLog.clear();
-            String searchText = searchEditText.getText().toString();
+            String searchText = editTextSearch.getText().toString();
             newsURL = queryURL + searchText;
             NewsQuery  newsQuery = new NewsQuery();
-            bar.setVisibility(View.VISIBLE);
+            this.mainToolBar.setVisibility(View.VISIBLE);
             newsQuery.execute(newsURL);
-
         });
-
-        prefs = getSharedPreferences("NewsReserveName", MODE_PRIVATE);
-        edit = prefs.edit();
-        String previous = prefs.getString("NewsReserveName", "");
-        searchEditText.setText(previous);
-
+        newsPrefs = getSharedPreferences("NewsReserveName", MODE_PRIVATE);
+        edit = newsPrefs.edit();
+        String previous = newsPrefs.getString("NewsReserveName", "");
+        editTextSearch.setText(previous);
     }
 
 
+    /**
+     * Method used to save the shared_preferences values
+     */
     @Override
     protected void onPause(){
         super.onPause();
-        edit.putString("NewsReserveName", searchEditText.getText().toString());
+        edit.putString("NewsReserveName", editTextSearch.getText().toString());
         edit.commit();
     }
 
+    /**
+     * Method uses inflater to create toolbar
+     * @param menu
+     * @return true BOOLEAN statement
+     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
@@ -156,7 +127,12 @@ public class MainNewsPage extends AppCompatActivity {
         return true;
     }
 
-
+    /**
+     *  Method used for displaying and handling toolbar choices on top of page
+     *  Used to navigate to everyone's work
+     * @param item
+     * @return true BOOLEAN statement
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
@@ -178,7 +154,7 @@ public class MainNewsPage extends AppCompatActivity {
                 MainNewsPage.this.startActivityForResult(goToMainNewsPage, 10);
                 break;
             case R.id.go_to_app_help:
-                helpAlert();
+                newsHelpDialog();
                 break;
             case R.id.go_to_app_favourites:
                 Intent goToNewsFavourites = new Intent(MainNewsPage .this, NewsArticleHelper .class);
@@ -189,77 +165,58 @@ public class MainNewsPage extends AppCompatActivity {
     }
 
 
-    //TODO: VAR content
-    public void helpAlert() {
-        View middle = getLayoutInflater().inflate(R.layout.news_about_help, null);
-
+    /**
+     * Custom help dialog and information method. Pops up a information page with relevant instructions
+     */
+    public void newsHelpDialog() {
+        View centerOfPage = getLayoutInflater().inflate(R.layout.news_about_help, null);
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder
-                .setPositiveButton("Sounds Good!", (dialog, id) -> {
-                    // What to do on Accept
-                }).setView(middle);
+        builder.setPositiveButton("Sounds Good!", (dialog, id) -> {
+                }).setView(centerOfPage);
         builder.create().show();
     }
 
 
+    /**
+     * Method used for getters and setters. Customized to modify how listView looks
+     */
     private class MyListAdapter extends BaseAdapter {
 
+        //Getter
         @Override
         public int getCount() {
             return newsLog.size();
         }
 
+        //Getter
         @Override
         public NewsArticleSetterGetter getItem(int position) {
             return newsLog.get(position);
         }
-
+        //Getter
         @Override
         public long getItemId(int position) {
             return position;
         }
 
+        /**
+         * Method used to get Title information
+         * @param position
+         * @param convertView
+         * @param parent
+         * @return thisRow
+         */
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
-            View thisRow = convertView;
+            View thisRow;
             NewsArticleSetterGetter rowNews = getItem(position);
 
             thisRow = getLayoutInflater().inflate(R.layout.news_view_row, null);
-            TextView itemTitle = thisRow.findViewById(R.id.newsTitle);
-//            TextView itemDescript = thisRow.findViewById(R.id.newsAuthor);
-            //TextView itemURL = thisRow.findViewById(R.id.newsURL);
-
+            TextView itemTitle = thisRow.findViewById(R.id.newsArticleTitleMain);
             itemTitle.setText(rowNews.getTitle() + " ");
-//            itemDescript.setText("Author: " + rowNews.getAuthor() + " ");
-// itemURL.setText("URL: " + rowNews.getUrl() + " ");
             return thisRow;
         }
     }
-
-//    /**
-//     * customized Alert Boxed
-//     * WHEN YOU HIT THE HELP BUTTON
-//     */
-//    private void alertExample() {
-//        View middle = getLayoutInflater().inflate(R.layout.news_about_help, null);
-//
-//
-//        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-//        builder.setMessage("The Message")
-//                .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-//                    public void onClick(DialogInterface dialog, int id) {
-//                        // What to do on Accept
-//                    }
-//                })
-////                .setNegativeButton("Negative", new DialogInterface.OnClickListener() {
-////                    public void onClick(DialogInterface dialog, int id) {
-////                        // What to do on Cancel
-////                    }
-////                })
-//                .setView(middle);
-//
-//        builder.create().show();
-//    }
 
     /**
      * class used for Async Task that gets JSON Object from web pages
@@ -305,6 +262,11 @@ public class MainNewsPage extends AppCompatActivity {
          * @see #publishProgress
          */
 
+        /**
+         * Method used to handle and connect online webpages and JSON objects/setting and getting
+         * @param strings
+         * @return
+         */
         @Override
         protected String doInBackground(String... strings) {
 
@@ -346,35 +308,31 @@ public class MainNewsPage extends AppCompatActivity {
                     publishProgress(progress);
 
                 }
-
             }
-
-            //TODO: WALLAH
-            catch (MalformedURLException e) { ret = "Malformed URL exception";
-            } catch (IOException e)
-
+            catch (IOException e)
             {
-                ret = "IO Exception: WIFI not connected";
-            } catch (JSONException e) {
-                ret = "JSON exception";
+                ret = "IO Exception: no INTERNET CONNECTION";
+            }
+            catch (JSONException e)
+            {
+                ret = "JSON exception/ERROR";
             }
             return ret;
         }
 
         /**
-         * Update progress bar, list, and adapter
+         * Method used to update the progress bar after searching for an article
          * @param s
          */
         @Override
         protected void onPostExecute(String s) {
-            ProgressBar bar = findViewById(R.id.newsBar);
-            bar.setVisibility(View.INVISIBLE);
-            ListView newsList = findViewById(R.id.newsList);
-            newsList.setAdapter(newsAdapter = new MyListAdapter());
-
+            ProgressBar newsLoadingBar = findViewById(R.id.newsProgessBar);
+            newsLoadingBar.setVisibility(View.INVISIBLE);
+            ListView newsMainListView = findViewById(R.id.newsListView);
+            newsMainListView.setAdapter(newsAdapter = new MyListAdapter());
         }
         /**
-         * update progress
+         * Updates current progress
          * @param values
          */
         @Override

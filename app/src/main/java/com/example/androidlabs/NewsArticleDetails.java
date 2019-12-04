@@ -3,10 +3,8 @@ package com.example.androidlabs;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-
 import android.content.ContentValues;
 import android.content.Intent;
-import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.os.Bundle;
@@ -15,15 +13,22 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-
-/**
- * Page to display details of an article and save article
- */
-
+/**********************************************************************
+ Filename: NewsArticleDetails.java
+ Version: 1.5
+ Authors:	Martin Choy
+ Student No:	040835431
+ Course Name/Number:	CST2335 Mobile Graphical Interface Programming
+ Lab Sect:	013
+ Assignment #: Final Project - 1
+ Assignment name:  Final_GroupProject F19
+ Due Date: Dec 4th 2019 , 11:59PM midnight
+ Submission Date: Dec 4th 2019
+ Professor: Shahzeb Khowaja
+ *********************************************************************/
 
 /**
  * display detailed information about an article
@@ -36,9 +41,17 @@ import android.widget.Toast;
  * protected void onCreate(Bundle savedInstanceState)
  */
 
+/**
+ * Class used to display the details of the articles searched. Also saves them into database
+ */
 public class NewsArticleDetails extends AppCompatActivity {
 
 
+    /**
+     * Method uses inflater to create toolbar
+     * @param menu
+     * @return true BOOLEAN statement
+     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
@@ -46,6 +59,12 @@ public class NewsArticleDetails extends AppCompatActivity {
         return true;
     }
 
+    /**
+     *  Method used for displaying and handling toolbar choices on top of page
+     *  Used to navigate to everyone's work
+     * @param item
+     * @return true BOOLEAN statement
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
@@ -69,7 +88,7 @@ public class NewsArticleDetails extends AppCompatActivity {
                 break;
 
             case R.id.go_to_app_help:
-                helpAlert();
+                newsHelpDialog();
                 break;
 
             case R.id.go_to_app_favourites:
@@ -83,95 +102,63 @@ public class NewsArticleDetails extends AppCompatActivity {
         return true;
     }
 
-
-    //TODO: IMPLEMENT CHANGES
-    public void helpAlert() {
+    /**
+     * Custom help dialog and information method. Pops up a information page with relevant instructions
+     */
+    public void newsHelpDialog() {
         View middle = getLayoutInflater().inflate(R.layout.news_about_help, null);
-
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder
-                .setPositiveButton("Sounds Good!", (dialog, id) -> {
-                }).setView(middle);
+        builder.setPositiveButton("Sounds Good!", (dialog, id) -> { }).setView(middle);
         builder.create().show();
     }
 
-
-
-//    ImageView urlNewsImage;
+    /**
+     * Method used for getting article information, setting up toolbar, connecting to the database
+     * Saving to the database. Launching sites to the web
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.news_page_info);
-        SQLiteDatabase db;
+        SQLiteDatabase newsDatabase;
 
-        Toolbar tBar = findViewById(R.id.navigation_toolbar);
-        setSupportActionBar(tBar);
+        Toolbar newsToolBar = findViewById(R.id.navigation_toolbar);
+        setSupportActionBar(newsToolBar);
 
+        Intent mainNewsPageDataHandle = getIntent();
+        String newsPageTitle = mainNewsPageDataHandle.getStringExtra("newsArticleTitleMain");
+        String newsPageDescription = mainNewsPageDataHandle.getStringExtra( "newsArticleDescription1");
+        String newsPageLaunchURL = mainNewsPageDataHandle.getStringExtra("newsURL");
 
-        Intent dataFromPreviousPage = getIntent();
-        String title = dataFromPreviousPage.getStringExtra("newsTitle");
-        String description = dataFromPreviousPage.getStringExtra( "newsDescription");
-     //   String urlToImage = dataFromPreviousPage.getStringExtra("newsImage");
-        //getUrlToImage
-        String openURL = dataFromPreviousPage.getStringExtra("newsURL");
+        TextView savedNewsPageTitle = findViewById(R.id.newsArticleTitleMain);
+        savedNewsPageTitle.setText(newsPageTitle);
+        TextView savedDescription = findViewById(R.id.newsArticleDescription1);
+        savedDescription.setText(newsPageDescription);
+        Button newsPageURLLauncher = findViewById(R.id.newsGoToPage);
 
-        TextView savedTitle = findViewById(R.id.newsTitle);
-        savedTitle.setText(title);
-
-
-        TextView savedDescription = findViewById(R.id.newsDescription);
-        savedDescription.setText(description);
-
-
-//        ImageView savedImage = findViewById(R.id.newsImage);
-////        savedImage.setImageBitmap(urlToImage);
-
-        Button gotoURL = findViewById(R.id.newsGoToPage);
-
-
-        gotoURL.setOnClickListener(clik ->{
-            Toast.makeText(NewsArticleDetails.this, "Launching:"+ openURL , Toast.LENGTH_LONG).show();
+        newsPageURLLauncher.setOnClickListener(clik ->{
+            Toast.makeText(NewsArticleDetails.this, "Launching:"+ newsPageLaunchURL , Toast.LENGTH_LONG).show();
             Intent webOpen = new Intent(android.content.Intent.ACTION_VIEW);
-            webOpen.setData(Uri.parse(openURL));
+            webOpen.setData(Uri.parse(newsPageLaunchURL));
             startActivity(webOpen);
 
         });
 
 
-
-        NewsArticleDB dbOpener = new NewsArticleDB(this);
-        db = dbOpener.getWritableDatabase();
-        String [] columns = {NewsArticleDB.COL_ID,
-                NewsArticleDB.COL_NAME,
-                NewsArticleDB.COL_AUTHOR, NewsArticleDB.COL_TITLE,
-                NewsArticleDB.COL_DESCRIPTION,  NewsArticleDB.COL_URL,
-                NewsArticleDB.COL_URL_TO_IMAGE,
-                NewsArticleDB.COL_PUBLISHED_AT,
-                NewsArticleDB.COL_CONTENT
-        };
-        Cursor results = db.query(false, NewsArticleDB.TABLE_NAME, columns, null, null, null, null, null, null);
-        int idColIndex = results.getColumnIndex(NewsArticleDB.COL_ID);
-        int nameColIndex = results.getColumnIndex(NewsArticleDB.COL_NAME);
-        int authorColIndex = results.getColumnIndex(NewsArticleDB.COL_AUTHOR);
-        int titleColIndex = results.getColumnIndex(NewsArticleDB.COL_TITLE);
-        int descriptionColIndex = results.getColumnIndex(NewsArticleDB.COL_DESCRIPTION);
-        int urlColIndex = results.getColumnIndex(NewsArticleDB.COL_URL);
-        int urlToImageColIndex = results.getColumnIndex(NewsArticleDB.COL_URL_TO_IMAGE);
-        int publishedAtColIndex = results.getColumnIndex(NewsArticleDB.COL_PUBLISHED_AT);
-        int contentColIndex = results.getColumnIndex(NewsArticleDB.COL_CONTENT);
-
-
-        Button saveButton = findViewById(R.id.newsSave);
+        NewsArticleDB newsDataBase = new NewsArticleDB(this);
+        newsDatabase = newsDataBase.getWritableDatabase();
+        Button saveButton = findViewById(R.id.newsArticleSave);
 
         saveButton.setOnClickListener( click ->
         {
             Toast.makeText(NewsArticleDetails.this, "PAGE SAVED (STORED UNDER FAVOURITES)" , Toast.LENGTH_LONG).show();
             ContentValues newRowValues = new ContentValues();
-            newRowValues.put(NewsArticleDB.COL_TITLE, title);
-            newRowValues.put(NewsArticleDB.COL_DESCRIPTION, description);
-            newRowValues.put(NewsArticleDB.COL_URL, openURL);
-            long newId = db.insert(NewsArticleDB.TABLE_NAME, null, newRowValues);
+            newRowValues.put(NewsArticleDB.COL_TITLE, newsPageTitle);
+            newRowValues.put(NewsArticleDB.COL_DESCRIPTION, newsPageDescription);
+            newRowValues.put(NewsArticleDB.COL_URL, newsPageLaunchURL);
+            long newId = newsDatabase.insert(NewsArticleDB.TABLE_NAME, null, newRowValues);
         });
 
     }

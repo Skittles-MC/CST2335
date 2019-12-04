@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Android Labs</string>
+    <string name="app_name"> Android Final Group Project Fall 2019</string>
     <string name="hello_message">Bonjour!</string>
     <string name="ButtonText">I\’m a button</string>
     <string name="ecs_Long">Longitude</string>
@@ -20,10 +20,17 @@
 
 
 <!--    TODO: GOTTA TRANSLATE THIS-->
+
+    <string name="newsSaveLink">SAVE LINK</string>
+    <string name="newsOpenLink">OPEN LINK</string>
+    <string name="newsSearchBar">Search</string>
+    <string name="newsDescription">Description:</string>
+    <string name="newsTitle">Article Title</string>
+    <string name="TitleMessage">CST2335 Final</string>
     <string name="recipes">Recipes page</string>
     <string name="news">News page</string>
     <string name="car_chargers">Car Chargers page</string>
-    <string name="currency_exchange">Currency Exchange page</string>
+    <string name="currency_exchange">Currency Exchange page</string>0
 
     <string name="aboutHelp1">Activity Name: News API</string>
     <string name="aboutHelp2">Activity Version number: V1.3</string>

@@ -10,30 +10,36 @@
 
 
     <EditText
-        android:id="@+id/newsEditText"
+        android:id="@+id/newsSearchText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Type here"
 
         />
     <Button
-        android:id="@+id/newsButton1"
+        android:id="@+id/newsButtonSearch"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="SEARCHHHHH"
+        android:text="@string/newsSearchBar"
         />
 
     <ProgressBar
-        android:id="@+id/newsBar"
+        android:id="@+id/newsProgessBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:visibility="visible"
         />
 
     <ListView
-        android:id="@+id/newsList"
+        android:id="@+id/newsListView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:divider="#05a4c5"
+        android:listSelector="#05c53f"
+        android:dividerHeight="6dp"
         android:transcriptMode = "alwaysScroll"
+        android:textAlignment="center"
+        android:textSize="200dp"
         />
+
 </LinearLayout>

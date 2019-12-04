@@ -91,7 +91,7 @@ public class ECSActivity extends AppCompatActivity {
         longitudeText.setText(lastLongitude);
 
 
-       //progress bar
+       //progress mainToolBar
         pgsBar.setVisibility(View.VISIBLE);
         pgsBar.setProgress(0);
 

@@ -2,27 +2,43 @@ package com.example.androidlabs;
 
 
 
+/**********************************************************************
+ Filename: MainNewsPage.java
+ Version: 1.5
+ Authors:	Martin Choy
+ Student No:	040835431
+ Course Name/Number:	CST2335 Mobile Graphical Interface Programming
+ Lab Sect:	013
+ Assignment #: Final Project - 1
+ Assignment name:  Final_GroupProject F19
+ Due Date: Dec 4th 2019 , 11:59PM midnight
+ Submission Date: Dec 4th 2019
+ Professor: Shahzeb Khowaja
+ *********************************************************************/
+
+/**
+ * Class is just used as a Getter and Setter methods
+ */
 public class NewsArticleSetterGetter {
 
     private long id;
     private String name , author, title, description, url, urlToImage, publishedAt, content;
 
-    // private String content;
-    //not using content maybe
-
-    //WALLAH USED FOR MainNewsPage
     /**
      * no-arg constructor
      *
-     * overloaded constructor to set id, title and author
-     * NewsArticleSetterGetter (long id, String title, String author) {
      *
      * overloaded constructor to set name, author, title, description, url, url to image, publisher, and content
      *  NewsArticleSetterGetter (String name, String author, String title, String description, String url, String urlToImage, String publishedAt, String content) {
      */
     // News (){}
 
-
+    /**
+     * Overloaded constructor to set id, title, author
+     * @param id
+     * @param title
+     * @param author
+     */
     NewsArticleSetterGetter (long id, String title, String author) {
         setId(id);
         setTitle(title);
@@ -30,6 +46,17 @@ public class NewsArticleSetterGetter {
 
     }
 
+    /**
+     * Overloaded constructor to set the following parameters
+     * @param name
+     * @param author
+     * @param title
+     * @param description
+     * @param url
+     * @param urlToImage
+     * @param publishedAt
+     * @param content
+     */
     NewsArticleSetterGetter (String name, String author, String title, String description, String url, String urlToImage, String publishedAt, String content) {
 
         setName(name);

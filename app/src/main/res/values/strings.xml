@@ -20,6 +20,12 @@
 
 
 
+    <string name="newsSaveLink">SAVE LINK</string>
+    <string name="newsOpenLink">OPEN LINK</string>
+    <string name="newsSearchBar">Search</string>
+    <string name="newsDescription">Description:</string>
+    <string name="newsTitle">Article Title</string>
+    <string name="TitleMessage">CST2335 Final</string>
     <string name="aboutHelp1">Activity Name: News API</string>
     <string name="aboutHelp2">Activity Version number: V1.3</string>
     <string name="aboutHelp3">Student Name: Martin Choy</string>

@@ -16,35 +16,35 @@
             android:layout_width="match_parent"
             android:id="@+id/navigation_toolbar"
             />
-
-        <!-- content goes here -->
-
-
             <TextView
-                android:id="@+id/newsText1"
+                android:id="@+id/newsArticleTitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="TITLEEEEE"
-                android:textSize="30dp"
+                android:text="@string/newsTitle"
+                android:textSize="20dp"
+                android:textStyle="bold|italic"
+                android:textAlignment="center"
+
 
                 />
             <TextView
-                android:id="@+id/newsTitle"
+                android:id="@+id/newsArticleTitleMain"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
 
                 />
 
             <TextView
-                android:id="@+id/newsText2"
+                android:id="@+id/newsArticleDescription"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Description"
-                android:textSize="30dp"
+                android:text="@string/newsDescription"
+                android:textSize="20dp"
+                android:textStyle="bold|italic"
 
                 />
             <TextView
-                android:id="@+id/newsDescription"
+                android:id="@+id/newsArticleDescription1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 />
@@ -66,131 +66,15 @@
                     android:id="@+id/newsGoToPage"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-
-                    android:text="OPEN LINK"
+                    android:text="@string/newsOpenLink"
                     />
 
                 <Button
-                    android:id="@+id/newsSave"
+                    android:id="@+id/newsArticleSave"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="SAVBEE PAGEe"
+                    android:text="@string/newsSaveLink"
                     />
         </LinearLayout>
     </LinearLayout>
 </ScrollView>
-
-
-
-<!--<?xml version="1.0" encoding="utf-8"?>-->
-<!--<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
-<!--    android:orientation="vertical" android:layout_width="match_parent"-->
-<!--    android:layout_height="match_parent">-->
-<!--    <androidx.appcompat.widget.Toolbar-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:id="@+id/navigation_toolbar"-->
-<!--        />-->
-
-<!--    <TextView-->
-<!--        android:id="@+id/newsText1"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:text="TITLEEEEE"-->
-<!--        android:textSize="30dp"-->
-
-<!--        />-->
-<!--    <TextView-->
-<!--        android:id="@+id/newsTitle"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-
-<!--        />-->
-
-<!--    <TextView-->
-<!--        android:id="@+id/newsText2"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:text="Description"-->
-<!--        android:textSize="30dp"-->
-
-<!--        />-->
-<!--    <TextView-->
-<!--        android:id="@+id/newsDescription"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        />-->
-
-
-<!--    &lt;!&ndash;    <ImageView&ndash;&gt;-->
-<!--    &lt;!&ndash;        android:id="@+id/urlToImage"&ndash;&gt;-->
-<!--    &lt;!&ndash;        android:contentDescription="TEST"&ndash;&gt;-->
-<!--    &lt;!&ndash;        android:layout_width="match_parent"&ndash;&gt;-->
-<!--    &lt;!&ndash;        android:layout_height="wrap_content"&ndash;&gt;-->
-<!--    &lt;!&ndash;        />&ndash;&gt;-->
-
-
-<!--    <ConstraintLayout-->
-<!--        android:id="@+id/InnerRelativeLayout"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_gravity="center" >-->
-
-<!--        <Button-->
-<!--            android:id="@+id/newsGoToPage"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:text="OPEN LINK"-->
-<!--            />-->
-
-<!--        <Button-->
-<!--            android:id="@+id/newsSave"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:text="SAVBEE PAGEe"-->
-
-<!--            />-->
-<!--    </ConstraintLayout>-->
-
-<!--&lt;!&ndash;        <Button&ndash;&gt;-->
-<!--&lt;!&ndash;            android:id="@+id/newsGoToPage"&ndash;&gt;-->
-<!--&lt;!&ndash;            android:layout_width="match_parent"&ndash;&gt;-->
-<!--&lt;!&ndash;            android:layout_height="wrap_content"&ndash;&gt;-->
-
-<!--&lt;!&ndash;            android:text="OPEN LINK"&ndash;&gt;-->
-<!--&lt;!&ndash;            />&ndash;&gt;-->
-
-<!--&lt;!&ndash;        <Button&ndash;&gt;-->
-<!--&lt;!&ndash;            android:id="@+id/newsSave"&ndash;&gt;-->
-<!--&lt;!&ndash;            android:layout_width="match_parent"&ndash;&gt;-->
-<!--&lt;!&ndash;            android:layout_height="wrap_content"&ndash;&gt;-->
-<!--&lt;!&ndash;            android:text="SAVBEE PAGEe"&ndash;&gt;-->
-<!--&lt;!&ndash;            />&ndash;&gt;-->
-
-<!--&lt;!&ndash;    </LinearLayout>&ndash;&gt;-->
-
-<!--&lt;!&ndash;    <Button&ndash;&gt;-->
-<!--&lt;!&ndash;        android:id="@+id/newsGoToPage"&ndash;&gt;-->
-<!--&lt;!&ndash;        android:layout_width="match_parent"&ndash;&gt;-->
-<!--&lt;!&ndash;        android:layout_height="wrap_content"&ndash;&gt;-->
-<!--&lt;!&ndash;        &ndash;&gt;-->
-<!--&lt;!&ndash;        android:text="OPEN LINK"&ndash;&gt;-->
-<!--&lt;!&ndash;        />&ndash;&gt;-->
-
-<!--&lt;!&ndash;    <Button&ndash;&gt;-->
-<!--&lt;!&ndash;        android:id="@+id/newsSave"&ndash;&gt;-->
-<!--&lt;!&ndash;        android:layout_width="match_parent"&ndash;&gt;-->
-<!--&lt;!&ndash;        android:layout_height="wrap_content"&ndash;&gt;-->
-<!--&lt;!&ndash;        android:text="SAVBEE PAGEe"&ndash;&gt;-->
-<!--&lt;!&ndash;        />&ndash;&gt;-->
-
-
-
-
-
-
-
-
-
-
-<!--</LinearLayout>-->
