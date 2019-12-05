@@ -189,17 +189,17 @@ public class ECSActivity extends AppCompatActivity {
                 Toast.makeText(this, "This is where you are now!", Toast.LENGTH_LONG).show();
                 break;
             case R.id.recipe_main_page:
-                Intent goToRecipePage = new Intent(ECSActivity.this, MainNewsPage.class);
+                Intent goToRecipePage = new Intent(ECSActivity.this, MainActivityRecipe.class);
                 ECSActivity.this.startActivityForResult(goToRecipePage, 10);
                 break;
             case R.id.currency_exchange_main_page:
               Intent goToCurrencyExchange = new Intent(ECSActivity.this, CurrencyConvert.class);
                ECSActivity.this.startActivityForResult(goToCurrencyExchange, 10);
-//                break;
-//            case R.id.news_main_page:
-//                Intent goToNewsPage = new Intent(ECSActivity.this, MainNewsPage.class);
-//                ECSActivity.this.startActivityForResult(goToNewsPage, 10);
-//                break;
+                break;
+            case R.id.news_main_page:
+               Intent goToNewsPage = new Intent(ECSActivity.this, MainNewsPage.class);
+                ECSActivity.this.startActivityForResult(goToNewsPage, 10);
+                break;
             case R.id.go_to_app_favourites:
                 Intent goToCarChargerFavourites = new Intent(ECSActivity.this, ECSfavorite.class);
                 ECSActivity.this.startActivityForResult(goToCarChargerFavourites, 10);

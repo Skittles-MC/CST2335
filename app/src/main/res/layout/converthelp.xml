@@ -6,28 +6,28 @@
 <!--    Activity Name:-->
     <TextView
         android:id="@+id/aboutConvert"
-        android:text="@string/Name"
+        android:text="Name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         />
 <!--    Activity Version number: V1.3-->
     <TextView
         android:id="@+id/aboutConvert2"
-        android:text="@string/Ver"
+        android:text="Ver"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         />
 
     <TextView
         android:id="@+id/aboutConvert3"
-        android:text="@string/Stud"
+        android:text="Stud"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         />
 <!--    How to Use:-->
     <TextView
         android:id="@+id/aboutConvert4"
-        android:text="@string/lista"
+        android:text="lista"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         />

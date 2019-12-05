@@ -45,8 +45,19 @@
         <string name="help1">Click star button to save in Favorite List and Delete</string>
         <string name="help2">Click once to delete from Favorite List</string>
 
+    <string name="list1">
+    <li> 1. Itype ang numero.</li>\n
+        \n
+    <li>2. Pumili ng country pera</li>\n
+        \n
+    <li>3. pumili ng country kung anung pera</li>\n
+        \n
+    <li>4. pindotin ang convert button.</li>\n
 
-
+</string>
+<string name="ecsHelp">    1. Enter your search Coordinates into the Latitude and Longitude text boxes-->
+        2. Afterwards hit the search Button
+    3. A list of locations will load below the search button and you can select one of them.</string>
 
 </resources>
 

@@ -6,7 +6,7 @@
     <!--    Activity Name: Electric Car Charging Station Finder-->
     <TextView
         android:id="@+id/aboutHelp1"
-        android:text="@string/aboutHelp1"
+        android:text="Electric Car Charging Station Finder"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         />
@@ -20,7 +20,7 @@
     <!--    Student Name: Mark Daley-->
     <TextView
         android:id="@+id/aboutHelp3"
-        android:text="@string/aboutHelp3"
+        android:text=" Student Name: Mark Daley"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         />
