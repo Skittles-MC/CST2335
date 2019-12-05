@@ -140,16 +140,16 @@ public class NewsArticleHelper extends AppCompatActivity {
 
 
             case R.id.currency_exchange_main_page:
-                //         Intent goToCurrencyExchange = new Intent(NewsSaved.this, CurrencyExchangeMain.class);
-                //         NewsSaved.this.startActivityForResult(goToCurrencyExchange, 10);
+//                         Intent goToCurrencyExchange = new Intent(NewsArticleHelper.this, ECSActivity.class);
+//                NewsArticleHelper.this.startActivityForResult(goToCurrencyExchange, 10);
                 break;
             case R.id.car_charger_main_page:
-         //       Intent goToCarChargerFinder = new Intent(NewsSaved.this, CarChargerFinder.class);
-          //      NewsSaved.this.startActivityForResult(goToCarChargerFinder, 10);
+                Intent goToCurrencyExchange = new Intent(NewsArticleHelper.this, ECSActivity.class);
+                NewsArticleHelper.this.startActivityForResult(goToCurrencyExchange, 10);
                 break;
             case R.id.recipe_main_page:
-                //      Intent goToNewsPage = new Intent(NewsSaved.this, RecipePage.class);
-                //      NewsSaved.this.startActivityForResult(goToNewsPage, 10);
+//                Intent goToCurrencyExchange = new Intent(NewsArticleHelper.this, ECSActivity.class);
+//                NewsArticleHelper.this.startActivityForResult(goToCurrencyExchange, 10);
                 break;
             case R.id.news_main_page:
                 Intent goToMainNewsPage = new Intent(NewsArticleHelper .this, MainNewsPage .class);

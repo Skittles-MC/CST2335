@@ -137,17 +137,14 @@ public class MainNewsPage extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.currency_exchange_main_page:
-               // Intent goToCurrencyExchange = new Intent(MainNewsPage.this, CurrencyExchangeMain.class);
-               // MainNewsPage.this.startActivityForResult(goToCurrencyExchange, 10);
                 break;
             case R.id.car_charger_main_page:
-                // Intent goToCarChargerFinder = new Intent(MainNewsPage.this, CarChargerFinder.class);
-                // MainNewsPage.this.startActivityForResult(goToCarChargerFinder, 10);
+                Intent goToCar = new Intent(MainNewsPage .this, ECSActivity .class);
+                MainNewsPage.this.startActivityForResult(goToCar, 10);
                 break;
-
             case R.id.recipe_main_page:
-                //Intent goToNewsPage = new Intent(MainNewsPage.this, RecipePage.class);
-                // MainNewsPage.this.startActivityForResult(goToNewsPage, 10);
+//                Intent goToCar = new Intent(MainNewsPage .this, ECSActivity .class);
+//                MainNewsPage.this.startActivityForResult(goToCar, 10);
                 break;
             case R.id.news_main_page:
                 Intent goToMainNewsPage = new Intent(MainNewsPage .this, MainNewsPage .class);
@@ -222,22 +219,9 @@ public class MainNewsPage extends AppCompatActivity {
      * class used for Async Task that gets JSON Object from web pages
      */
 
-    //TODO: IMAGES. NEED IMAGES HERE
-        //TODO: IDS/VAR HERE
-
-        //https://stackoverflow.com/questions/6407324/how-to-display-image-from-url-on-android
-        //https://stackoverflow.com/questions/28023049/display-images-from-url-using-json-android
-        //https://stackoverflow.com/questions/36197011/download-and-display-image-from-url-in-json-in-android
-        //refer to lab 6?
-
     private class NewsQuery extends AsyncTask<String, Integer, String> {
 
 
-        /**
-         * connect to web pages using URL and obtain JSON objects
-         * @param strings
-         * @return strings pulled from JSON objects
-         */
 
         /**
          * Override this method to perform a computation on a background thread. The
@@ -273,7 +257,7 @@ public class MainNewsPage extends AppCompatActivity {
             String ret = null;
             JSONObject jObject;
 
-            try {       // Connect to the server:
+            try {
                 URL url = new URL(strings[0]);
 
                 HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();

@@ -31,17 +31,6 @@ import android.widget.Toast;
  *********************************************************************/
 
 /**
- * display detailed information about an article
- * allow user to save to article
- * send saved article information to database
- *
- *
- * * get article information from news main page
- *      * Connect and save to database
- * protected void onCreate(Bundle savedInstanceState)
- */
-
-/**
  * Class used to display the details of the articles searched. Also saves them into database
  */
 public class NewsArticleDetails extends AppCompatActivity {

@@ -25,15 +25,6 @@ public class NewsArticleSetterGetter {
     private String name , author, title, description, url, urlToImage, publishedAt, content;
 
     /**
-     * no-arg constructor
-     *
-     *
-     * overloaded constructor to set name, author, title, description, url, url to image, publisher, and content
-     *  NewsArticleSetterGetter (String name, String author, String title, String description, String url, String urlToImage, String publishedAt, String content) {
-     */
-    // News (){}
-
-    /**
      * Overloaded constructor to set id, title, author
      * @param id
      * @param title
@@ -79,10 +70,6 @@ public class NewsArticleSetterGetter {
         return name;
     }
 
-    public String getAuthor() {
-        return author;
-    }
-
     public String getTitle() {
         return title;
     }
@@ -93,18 +80,6 @@ public class NewsArticleSetterGetter {
 
     public String getUrl() {
         return url;
-    }
-
-    public String getUrlToImage() {
-        return urlToImage;
-    }
-
-    public String getPublishedAt() {
-        return publishedAt;
-    }
-
-    public String getContent() {
-        return content;
     }
 
     public void setId(long id) {

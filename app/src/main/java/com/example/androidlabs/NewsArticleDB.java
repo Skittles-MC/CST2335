@@ -38,7 +38,7 @@ public class NewsArticleDB extends SQLiteOpenHelper {
 
 
     /**
-     * Method used unify database name and it's version number
+     * Method used unify database name and it's version number...
      * @param newsDB
      */
     public NewsArticleDB(Activity newsDB){

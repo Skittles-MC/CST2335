@@ -22,12 +22,7 @@ import android.widget.ImageButton;
  Submission Date: Dec 4th 2019
  Professor: Shahzeb Khowaja
  *********************************************************************/
-
-
-//Student No:	040835431
 public class MainActivity extends AppCompatActivity {
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,11 +39,6 @@ public class MainActivity extends AppCompatActivity {
 
 
         newsArticleAPI.setOnClickListener(v -> {
-           // @Override
-           // public void onClick(View view) {
-            //    Intent goToMainNewsPage = new Intent(MainActivity.this, MainNewsPage.class);
-           //     startActivity(goToMainNewsPage);
-           // }
                    startActivity(new Intent(MainActivity.this, MainNewsPage.class));
         });
 
@@ -56,8 +46,6 @@ public class MainActivity extends AppCompatActivity {
         foodRecipeAPI.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                Intent goToFoodPage = new Intent(MainActivity.this, ChatRoomActivity.class);
-//                startActivity(goToFoodPage);
             }
         });
 
@@ -65,10 +53,7 @@ public class MainActivity extends AppCompatActivity {
         conversionAPI.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                Intent goToConversionPage = new Intent(MainActivity.this, ChatRoomActivity.class);
-//                startActivity(goToConversionPage);
             }
         });
-
     }
 }
