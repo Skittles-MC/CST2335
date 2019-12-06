@@ -13,14 +13,11 @@ import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.Toast;
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -89,7 +86,7 @@ public class ListViewOfRecipe extends AppCompatActivity {
          */
 
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.toolbar, menu);
+        inflater.inflate(R.menu.example_menurecipe, menu);
 
         return true;
     }
@@ -103,11 +100,11 @@ public class ListViewOfRecipe extends AppCompatActivity {
              *what to do when the menu item is selected:
              */
 
-            case R.id.go_to_app_favourites:
+            case R.id.favorite:
                 Intent intentFromMenu = new Intent(ListViewOfRecipe.this, PopulateDataBaseRecipe.class);
                 startActivity(intentFromMenu);
                 break;
-            case R.id.go_to_app_help:
+            case R.id.help:
 
                 Intent helperMenuIntent = new Intent(ListViewOfRecipe.this, HelperMenuRecipe.class);
                 startActivity(helperMenuIntent);

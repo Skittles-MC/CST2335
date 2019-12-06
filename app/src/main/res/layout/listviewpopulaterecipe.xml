@@ -12,9 +12,8 @@
         android:layout_height="wrap_content"
         android:textFontWeight="10"
         android:textSize="20sp"
-        android:textColor="#0000ff"
-        android:textColorHighlight="@color/cardview_light_background"
 
+     
         />
 <!--
     <TextView

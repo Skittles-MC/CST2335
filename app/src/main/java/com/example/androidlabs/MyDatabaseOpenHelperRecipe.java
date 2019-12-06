@@ -6,14 +6,20 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
+/**
+ * This class handles the details of the database
+ * such as Database_Name, Table Name etc.
+ */
 
 public class MyDatabaseOpenHelperRecipe extends SQLiteOpenHelper {
 
-    public static final String DATABASE_NAME = "MyDatabaseFile";
-    public static final int VERSION_NUM = 2;
-    public static final String TABLE_NAME = "Recipe";
+    public static final String DATABASE_NAME = "MyDatabase";
+    public static final int VERSION_NUM = 5;
+    public static final String TABLE_NAME = "Rec";
     public static final String COL_ID = "_id";
     public static final String COL_TEXT = "TEXT";
+
+
 
 
 
@@ -69,8 +75,4 @@ public class MyDatabaseOpenHelperRecipe extends SQLiteOpenHelper {
         //Create a new table:
         onCreate(db);
     }
-
-
-
-
 }

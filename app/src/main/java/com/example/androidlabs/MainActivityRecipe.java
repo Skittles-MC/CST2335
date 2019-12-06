@@ -107,7 +107,7 @@ public class MainActivityRecipe extends AppCompatActivity {
 
             case R.id.recipe_main_page:
                 Intent goToRecipe = new Intent(MainActivityRecipe.this, MainActivityRecipe.class);
-                 startActivity(goToRecipe);
+                startActivity(goToRecipe);
                 break;
             case R.id.news_main_page:
                 /*Intent goToMainNewsPage = new Intent(MainNewsPage .this, MainNewsPage .class);

@@ -213,20 +213,6 @@ public class SingleRecipe extends AppCompatActivity {
                 MyDatabaseOpenHelperRecipe dbOpener = new MyDatabaseOpenHelperRecipe(this);
                 SQLiteDatabase db = dbOpener.getWritableDatabase();
 
-
-//----------------Getting the Database--------------------------
-          /*      String [] columns = {MyDatabaseOpenHelperRecipe.COL_ID, MyDatabaseOpenHelperRecipe.COL_TEXT};
-
-                Cursor results = db.query(false, MyDatabaseOpenHelperRecipe.TABLE_NAME, columns,
-                        null, null, null, null, null, null);
-                int textColumnIndex = results.getColumnIndex(MyDatabaseOpenHelperRecipe.COL_TEXT);
-                // int receiveOrSendColIndex = results.getColumnIndex(MyDatabaseOpenHelperRecipe.COL_RECEIVEORSEND);
-                int idColIndex = results.getColumnIndex(MyDatabaseOpenHelperRecipe.COL_ID);
-
-                results.moveToFirst();*/
-                //------------------------------------
-
-
                 ContentValues newRowValues = new ContentValues();
                 newRowValues.put(MyDatabaseOpenHelperRecipe.COL_TEXT, title);
                 long newId = db.insert(MyDatabaseOpenHelperRecipe.TABLE_NAME, null, newRowValues);

@@ -17,10 +17,24 @@ import java.util.ArrayList;
 
 //import com.google.android.material.snackbar.Snackbar;
 
+/**
+ * This class fetches the result from the database into an arraylist
+ * and pass it to CustomAdapter class for display
+ * It also facilitates deletion of a record
+ */
 public class PopulateDataBaseRecipe extends Activity {
 
+    /**
+     * lv stores the ListView
+     */
     private ListView lv;
+    /**
+     * stores the database result
+     */
     private CustomAdapterRecipe customAdapterRecipe;
+    /**
+     * stores the results fetched from the database
+     */
     Cursor results;
 
     ArrayList<RecipeModelRecipe> objects = new ArrayList<>();
@@ -43,9 +57,9 @@ public class PopulateDataBaseRecipe extends Activity {
         int idColIndex = results.getColumnIndex(MyDatabaseOpenHelperRecipe.COL_ID);
 
         results.moveToFirst();
-
-
-
+/**
+ * Iterating the whole database and loading the result in the arraylist
+ */
         while(results.moveToNext())
         {
             String text = results.getString(textColumnIndex);
@@ -64,42 +78,20 @@ public class PopulateDataBaseRecipe extends Activity {
         lv.setAdapter(customAdapterRecipe);
         customAdapterRecipe.notifyDataSetChanged();
 
-
+/**
+ * Listening for record deletion
+ */
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-                /*Intent clickRecipeIntent = new Intent(PopulateDataBaseRecipe.this, SingleRecipe.class);
-                clickRecipeIntent.putExtra("position",position);
-                clickRecipeIntent.putExtra("map",recipeDetails.get(position));
-                startActivity(clickRecipeIntent);*/
-
-
 
                 long deleteRecord =objects.get(position).getId();
                 results.moveToFirst();
 
                 db.delete(MyDatabaseOpenHelperRecipe.TABLE_NAME, MyDatabaseOpenHelperRecipe.COL_ID+"="+deleteRecord,null );
                 customAdapterRecipe.notifyDataSetChanged();//NEW LINE ADDED
-               /* int textColumnIndex = results.getColumnIndex(MyDatabaseOpenHelperRecipe.COL_TEXT);
-                // int receiveOrSendColIndex = results.getColumnIndex(MyDatabaseOpenHelperRecipe.COL_RECEIVEORSEND);
-                int idColIndex = results.getColumnIndex(MyDatabaseOpenHelperRecipe.COL_ID);
-                results.moveToFirst();
-                ArrayList<RecipeModelRecipe> objectsAfterDeletion = new ArrayList<>();
-                while(results.moveToNext())
-                {
-                    String text = results.getString(textColumnIndex);
-                    //if 0 then send, if 1 then receive
-                    // int decisionValue = results.getInt(receiveOrSendColIndex);
-                    long idAfterDeletion = results.getLong(idColIndex);
 
-                    //add the new Contact to the array list:
-                    // contactsList.add(new Contact(name, email, id));
-                    objectsAfterDeletion.add(new RecipeModelRecipe(text,id));//waiting for new ChatModel
-
-                }*/
-                // finish();
-
+                //Initiating Snackbar
                 Snackbar sb = Snackbar.make(view, "Deletion Performed", Snackbar.LENGTH_INDEFINITE)
                         .setAction("Go Back?", new View.OnClickListener() {
                             @Override
